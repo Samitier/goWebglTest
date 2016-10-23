@@ -46,26 +46,36 @@
 
 	"use strict";
 	
-	__webpack_require__(3);
 	__webpack_require__(1);
+	__webpack_require__(2);
 
 /***/ },
 /* 1 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
-	var _three = __webpack_require__(2);
+	var _three = __webpack_require__(3);
+	
+	var _renderStats = __webpack_require__(6);
 	
 	var scene = void 0,
 	    camera = void 0,
 	    renderer = void 0,
 	    geometry = void 0,
 	    material = void 0,
-	    mesh = void 0;
+	    mesh = void 0,
+	    renderStats = void 0;
 	
 	var init = function init() {
 	   scene = new _three.Scene();
+	   renderStats = new _renderStats.RenderStats();
 	
 	   camera = new _three.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
 	   camera.position.z = 1000;
@@ -84,18 +94,19 @@
 	
 	var animate = function animate() {
 	   requestAnimationFrame(animate);
-	
+	   renderStats.begin();
 	   mesh.rotation.x += 0.01;
 	   mesh.rotation.y += 0.02;
 	
 	   renderer.render(scene, camera);
+	   renderStats.end();
 	};
 	
 	init();
 	animate();
 
 /***/ },
-/* 2 */
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function (global, factory) {
@@ -41892,10 +41903,63 @@
 	})));
 
 /***/ },
-/* 3 */
+/* 4 */,
+/* 5 */
 /***/ function(module, exports) {
 
-	// removed by extract-text-webpack-plugin
+	// stats.js - http://github.com/mrdoob/stats.js
+	var Stats=function(){function h(a){c.appendChild(a.dom);return a}function k(a){for(var d=0;d<c.children.length;d++)c.children[d].style.display=d===a?"block":"none";l=a}var l=0,c=document.createElement("div");c.style.cssText="position:fixed;top:0;left:0;cursor:pointer;opacity:0.9;z-index:10000";c.addEventListener("click",function(a){a.preventDefault();k(++l%c.children.length)},!1);var g=(performance||Date).now(),e=g,a=0,r=h(new Stats.Panel("FPS","#0ff","#002")),f=h(new Stats.Panel("MS","#0f0","#020"));
+	if(self.performance&&self.performance.memory)var t=h(new Stats.Panel("MB","#f08","#201"));k(0);return{REVISION:16,dom:c,addPanel:h,showPanel:k,begin:function(){g=(performance||Date).now()},end:function(){a++;var c=(performance||Date).now();f.update(c-g,200);if(c>e+1E3&&(r.update(1E3*a/(c-e),100),e=c,a=0,t)){var d=performance.memory;t.update(d.usedJSHeapSize/1048576,d.jsHeapSizeLimit/1048576)}return c},update:function(){g=this.end()},domElement:c,setMode:k}};
+	Stats.Panel=function(h,k,l){var c=Infinity,g=0,e=Math.round,a=e(window.devicePixelRatio||1),r=80*a,f=48*a,t=3*a,u=2*a,d=3*a,m=15*a,n=74*a,p=30*a,q=document.createElement("canvas");q.width=r;q.height=f;q.style.cssText="width:80px;height:48px";var b=q.getContext("2d");b.font="bold "+9*a+"px Helvetica,Arial,sans-serif";b.textBaseline="top";b.fillStyle=l;b.fillRect(0,0,r,f);b.fillStyle=k;b.fillText(h,t,u);b.fillRect(d,m,n,p);b.fillStyle=l;b.globalAlpha=.9;b.fillRect(d,m,n,p);return{dom:q,update:function(f,
+	v){c=Math.min(c,f);g=Math.max(g,f);b.fillStyle=l;b.globalAlpha=1;b.fillRect(0,0,r,m);b.fillStyle=k;b.fillText(e(f)+" "+h+" ("+e(c)+"-"+e(g)+")",t,u);b.drawImage(q,d+a,m,n-a,p,d,m,n-a,p);b.fillRect(d+n-a,m,a,p);b.fillStyle=l;b.globalAlpha=.9;b.fillRect(d+n-a,m,a,e((1-f/v)*p))}}};"object"===typeof module&&(module.exports=Stats);
+
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.RenderStats = undefined;
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _stats = __webpack_require__(5);
+	
+	var _stats2 = _interopRequireDefault(_stats);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var RenderStats = function () {
+	    function RenderStats() {
+	        _classCallCheck(this, RenderStats);
+	
+	        this.stats = new _stats2.default();
+	        this.stats.showPanel(0);
+	        document.body.appendChild(this.stats.dom);
+	    }
+	
+	    _createClass(RenderStats, [{
+	        key: "begin",
+	        value: function begin() {
+	            this.stats.begin();
+	        }
+	    }, {
+	        key: "end",
+	        value: function end() {
+	            this.stats.end();
+	        }
+	    }]);
+	
+	    return RenderStats;
+	}();
+	
+	exports.RenderStats = RenderStats;
 
 /***/ }
 /******/ ]);

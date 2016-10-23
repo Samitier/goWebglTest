@@ -27,6 +27,7 @@
   "author": "Blai Samitier",
   "license": "ISC",
   "dependencies": {
+    "stats.js": "^0.16.0",
     "three": "^0.81.2"
   }
 }
