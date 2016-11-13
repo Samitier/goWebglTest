@@ -1,58 +1,69 @@
-"use strict"
+let path = require('path')
+let webpack = require('webpack')
+let ExtractTextPlugin = require("extract-text-webpack-plugin")
+let HtmlWebpackPlugin = require('html-webpack-plugin')
+let release = process.argv.indexOf('--release') !== -1
 
-let minimize = process.argv.indexOf('--minimize') !== -1,
-    release = process.argv.indexOf('--release') !== -1,
-    webpack = require('webpack'),
-    ExtractTextPlugin = require("extract-text-webpack-plugin"),
-    HtmlWebpackPlugin = require('html-webpack-plugin'),
-    plugins = [
-        new webpack.optimize.CommonsChunkPlugin({ name: ['app'] }),
-        new ExtractTextPlugin("bundle.css", { allChunks: true }),
-        new HtmlWebpackPlugin({ template: './index.html', hash: true })
-    ]
-
-if (release || minimize) {
-    plugins.push(new webpack.optimize.UglifyJsPlugin({mangle:false}))
-    plugins.push(new webpack.NoErrorsPlugin())
-    plugins.push(new webpack.optimize.DedupePlugin())
-}
 
 module.exports = {
     entry: {
-        app: "./index.js",
+        app: './app/main.js'
     },
     output: {
-        path: __dirname + "/../public",
+        path: path.resolve(__dirname, '../public'),
         publicPath: '/',
-        filename: "[name].js"
+        filename: 'assets/[name].bundle.js'
     },
-    devtool: (release) ? '' : 'source-map',
-    resolve: {
-        extensions: ['', '.js']
+    resolveLoader: {
+        root: path.join(__dirname, 'node_modules'),
     },
-    plugins: plugins,
+    plugins: [
+        new HtmlWebpackPlugin({ template: './index.html', hash: true, filename: 'index.html' }),
+        new ExtractTextPlugin("assets/style.bundle.css", { allChunks: true })
+    ],
     module: {
         loaders: [
             {
+                test: /\.vue$/,
+                loader: 'vue',
+                exclude: /node_modules/
+            },
+            {
                 test: /\.js$/,
-                exclude: /(node_modules|bower_components)/,
                 loader: 'babel',
-                query: {
-                    presets: ['es2015']
-                }
+                exclude: /node_modules/
             },
             {
                 test: /\.css$/,
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader?minimize!")
+                loader: ExtractTextPlugin.extract("style-loader", "css-loader?minimize"),
             },
             {
-                test: /\.less$/,
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader?minimize!less-loader?minimize!"),
-            },
-            {
-                test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-                loader: 'url-loader'
+                test: /\.(png|jpg|gif|svg)$/,
+                loader: 'file',
+                query: {
+                    name: '[name].[ext]?[hash]'
+                }
             }
         ]
-    }
+    },
+    devtool: '#eval-source-map'
+}
+
+if (process.env.NODE_ENV === 'production' || release) {
+    module.exports.devtool = ''
+    module.exports.plugins = (module.exports.plugins || []).concat([
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: '"production"'
+            }
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        }),
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.NoErrorsPlugin(),
+        new webpack.optimize.DedupePlugin()
+    ])
 }

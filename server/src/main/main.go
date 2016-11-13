@@ -25,12 +25,17 @@ func main() {
 	subrouter.HandleFunc("/", indexHandler)
 	subrouter.HandleFunc("/words", wordsHandler)
 	subrouter.HandleFunc("/words/{id}", wordHandler)
-	r.PathPrefix("/").Handler(http.FileServer(http.Dir("public")))
+	r.PathPrefix("/assets").Handler(http.FileServer(http.Dir("public")))
+	r.PathPrefix("/").HandlerFunc(serveIndex)
 	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(port), r))
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Welcome to an API made in GO")
+}
+
+func serveIndex(w http.ResponseWriter, r *http.Request) {
+	http.ServeFile(w, r, "public/index.html")
 }
 
 func wordsHandler(w http.ResponseWriter, r *http.Request) {
