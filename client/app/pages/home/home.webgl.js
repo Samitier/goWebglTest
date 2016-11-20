@@ -1,17 +1,14 @@
 import {Scene, Color, PerspectiveCamera, BoxGeometry, ShaderMaterial, Mesh, WebGLRenderer} from "three"
-import {RenderStats} from "../../webgl-utils/render-stats.js"
+import { ThreeScene } from "../../webgl-utils/three-scene.js"
  
-export class HomeWebgl {
+export class HomeWebgl extends ThreeScene {
     
     constructor() {
+        super(true)
         this.init()
-        this.animate()
     }
 
     init() {
-        this.scene = new Scene()
-        this.renderStats = new RenderStats()
-
         this.camera = new PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1000 )
         this.camera.position.z = 250
     
@@ -41,23 +38,14 @@ export class HomeWebgl {
         this.mesh = new Mesh( geometry, material )
         this.scene.add( this.mesh )
     
-        this.renderer = new WebGLRenderer( { alpha: true } )
         this.renderer.setClearColor( 0x123456 )
-        this.renderer.setSize( window.innerWidth, window.innerHeight )
-    
-        document.body.appendChild( this.renderer.domElement ) 
+        super.render()
     }
  
     animate() {
-        requestAnimationFrame( this.animate.bind(this) )
         this.uniforms.time.value += 0.005
         this.uniforms.color2.value = this.colors[0].lerp(this.colors[1], Math.abs(Math.cos(this.uniforms.time.value)))
         this.uniforms.color1.value = this.colors[2].lerp(this.colors[3], Math.abs(Math.cos(this.uniforms.time.value/2)))
-
-        this.renderStats.begin()
-    
-        this.renderer.render( this.scene, this.camera )
-        this.renderStats.end()
     }
 
     getVertexShader() {

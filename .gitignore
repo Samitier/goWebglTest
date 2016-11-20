@@ -77,3 +77,6 @@ $RECYCLE.BIN/
 node_modules
 .vscode
 *.map
+*.bundle.js
+*.bundle.css
+public\index.html

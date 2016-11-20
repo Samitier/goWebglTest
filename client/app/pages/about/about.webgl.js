@@ -1,42 +1,31 @@
-import {Scene, PerspectiveCamera, BoxGeometry, MeshBasicMaterial, Mesh, WebGLRenderer} from "three"
-import {RenderStats} from "../../webgl-utils/render-stats.js"
-
-let scene, camera, renderer, geometry, material, mesh, renderStats
+import { ObjectLoader, PerspectiveCamera, DirectionalLight } from "three"
+import { ThreeScene } from "../../webgl-utils/three-scene.js"
  
-export class AboutWebgl {
+export class AboutWebgl extends ThreeScene {
     
     constructor() {
+        super(true)
         this.init()
-        this.animate()
     }
 
     init() {
-        scene = new Scene()
-        renderStats = new RenderStats()
+        this.camera = new PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 )
+        this.camera.position.set(0, 12, 17)
+        this.camera.rotation.x = -0.1
 
-        camera = new PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 )
-        camera.position.z = 1000
-    
-        geometry = new BoxGeometry( 200, 200, 200 )
-        material = new MeshBasicMaterial( { color: 0xff0000, wireframe: true } )
-    
-        mesh = new Mesh( geometry, material )
-        scene.add( mesh )
-    
-        renderer = new WebGLRenderer()
-        renderer.setSize( window.innerWidth, window.innerHeight )
-    
-        document.body.appendChild( renderer.domElement ) 
+        let directionalLight = new DirectionalLight( 0xFFFFFF, 1 )
+        directionalLight.position.set(0, 1, 0.5)
+        this.scene.add( directionalLight )
+
+        let loader = new ObjectLoader()
+        loader.load( 'assets/models/male-figure.json', mesh => {   
+            this.mesh = mesh
+            this.scene.add( this.mesh )
+            super.render()
+        })
     }
  
     animate() {
-        requestAnimationFrame( this.animate.bind(this) )
-        renderStats.begin()
-        
-        mesh.rotation.x += 0.01
-        mesh.rotation.y += 0.02
-    
-        renderer.render( scene, camera )
-        renderStats.end()
+        this.mesh.rotation.y += 0.01
     }
 }
