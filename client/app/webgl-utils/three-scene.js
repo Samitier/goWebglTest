@@ -3,13 +3,14 @@ import { RenderStats } from "./render-stats.js"
 
 export class ThreeScene {
 
-    constructor(renderStats) {
+    constructor(renderStats, properties={}) {
         this.scene = new Scene()
         if(renderStats) this.renderStats = new RenderStats()
 
-        this.renderer = new WebGLRenderer()
+        this.renderer = new WebGLRenderer(properties)
         this.renderer.setSize( window.innerWidth, window.innerHeight )
         document.body.appendChild( this.renderer.domElement ) 
+        window.addEventListener( 'resize', this.onResizeWindow.bind( this ), false )
     }
  
     render() {
@@ -20,5 +21,9 @@ export class ThreeScene {
     
         this.renderer.render( this.scene, this.camera )
         if(this.renderStats) this.renderStats.end()
+    }
+
+    resize() {
+        this.renderer.setSize( window.innerWidth, window.innerHeight )
     }
 }

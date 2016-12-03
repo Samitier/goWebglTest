@@ -48,6 +48,10 @@ export class HomeWebgl extends ThreeScene {
         this.uniforms.color1.value = this.colors[2].lerp(this.colors[3], Math.abs(Math.cos(this.uniforms.time.value/2)))
     }
 
+    onResizeWindow() {
+        super.resize()
+    }
+
     getVertexShader() {
          return `
             uniform float scale;

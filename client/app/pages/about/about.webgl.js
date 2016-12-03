@@ -35,8 +35,12 @@ export class AboutWebgl extends ThreeScene {
         this.mesh.material.uniforms.time.value += 0.01
     }
 
-     getVertexShader() {
-         return `
+    onResizeWindow() {
+        super.resize()
+    }
+
+    getVertexShader() {
+        return `
             varying	vec3 transformedNormal;
             uniform float time;
 
