@@ -45,6 +45,7 @@
         padding: 0.5em 1em;
         cursor: pointer;
         transition: all 0.5s;
+        outline: 0!important;
     }
     .action-buttons-container > button:hover {
         background-color: white;
