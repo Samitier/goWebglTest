@@ -32,7 +32,7 @@
     .action-buttons-container {
         position:absolute;
         z-index:10;
-        bottom: 100px;
+        bottom: 80px;
         left:50%;
         margin-left:-100px;
         width:200px;
