@@ -1,4 +1,4 @@
-import { OrthographicCamera, DirectionalLight, BoxGeometry, MeshLambertMaterial, Mesh } from "three"
+import { OrthographicCamera, DirectionalLight, BoxGeometry, MeshLambertMaterial, Mesh, Raycaster, Color } from "three"
 import { ThreeScene } from "../../webgl-utils/three-scene.js"
  
 const   CUBE_SIZE = 24,
@@ -22,13 +22,13 @@ export class IsometricMap extends ThreeScene {
 
         //Painting map
 		let geometry = new BoxGeometry( CUBE_SIZE, CUBE_SIZE, CUBE_SIZE ),
-            material = new MeshLambertMaterial( { color: 0xffffff } ),
             map = this.getMap()
         for( let i = 0; i < map.length; ++i ) {
             for ( let j = 0; j < map[i].length; ++j ) {
                 let height = map[i][j]
                 if ( height != 0 ) {
-                    let cube = new Mesh( geometry, material ),
+                    let material = new MeshLambertMaterial( { color: 0xffffff } ),
+                        cube = new Mesh( geometry, material ),
                         xPos = ( j - Math.floor( map[i].length / 2 )) * CUBE_SIZE,
                         yPos = CUBE_SIZE * ( height - 1 ) / 2,
                         zPos = ( i - Math.floor( map.length / 2 )) * CUBE_SIZE
@@ -54,6 +54,13 @@ export class IsometricMap extends ThreeScene {
         this.camera.lookAt( this.scene.position )
         this.rotateAnimation = false
 
+        //Raycast setup
+        this.raycaster = new Raycaster()
+        this.mouse = { x: 0, y: 0 }
+        this.intersectedObject = null
+        this.isSelecting = false
+        document.addEventListener( 'mousemove', this.onDocumentMouseMove.bind(this), false )
+
         //Render setup
         this.renderer.setClearColor( 0x92ccdd )
         super.render()
@@ -65,6 +72,22 @@ export class IsometricMap extends ThreeScene {
             this.camera.position.x = Math.cos( this.time ) * CAMERA_X
             this.camera.position.z = Math.sin( this.time ) * CAMERA_Z
             this.camera.lookAt( this.scene.position )
+        }
+        if(this.isSelecting) {
+            this.raycaster.setFromCamera( this.mouse, this.camera )
+            let intersection = this.raycaster.intersectObjects( this.scene.children )
+
+            if ( intersection.length > 0 ) {
+                if ( this.intersectedObject != intersection[0].object ) {
+                    if ( this.intersectedObject ) this.intersectedObject.material.color = new Color( 0xffffff )
+                    this.intersectedObject = intersection[0].object
+                    this.intersectedObject.material.color = new Color(0xaaaaaa)
+                }
+            } 
+            else {
+                if ( this.intersectedObject ) this.intersectedObject.material.color = new Color( 0xffffff )
+                this.intersectedObject = null
+            }
         }
     }
 
@@ -81,6 +104,17 @@ export class IsometricMap extends ThreeScene {
 
     setRotateAnimation(isRotating) {
         this.rotateAnimation = isRotating
+    }
+
+    setIsSelecting(isSelecting) {
+        this.isSelecting = isSelecting
+    }
+
+    onDocumentMouseMove( event ) {
+        if(!this.isSelecting) return
+        event.preventDefault()
+        this.mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1
+        this.mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1
     }
 
     getMap() {

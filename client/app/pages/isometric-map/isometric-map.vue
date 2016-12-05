@@ -1,7 +1,7 @@
 <template>
     <div class='action-buttons-container'>
-        <button class='rotate' @click="toggleRotate">{{ isRotating ? 'Stop' : 'Rotate' }}</button>
-        <button class="edit">Edit</button>
+        <button class='rotate' @click="toggleRotate" v-bind:class="{ active: isRotating }"> Rotate </button>
+        <button class="edit" @click="toggleEdit" v-bind:class="{ active: isEditing }"> Edit </button>
         <button class="reset">Reset</button>
     </div>
 </template>
@@ -17,12 +17,17 @@
         },
         data: () => ({
             isometricMap: {},
-            isRotating: false
+            isRotating: false,
+            isEditing: false
         }),
         methods: {
             toggleRotate: function() {
                 this.isRotating = !this.isRotating
                 this.isometricMap.setRotateAnimation(this.isRotating)
+            },
+            toggleEdit: function() {
+                this.isEditing = !this.isEditing
+                this.isometricMap.setIsSelecting(this.isEditing)
             }
         }
     }
@@ -47,7 +52,7 @@
         transition: all 0.5s;
         outline: 0!important;
     }
-    .action-buttons-container > button:hover {
+    .action-buttons-container > button:hover, .action-buttons-container > button.active {
         background-color: white;
         color: #444444;
     }
