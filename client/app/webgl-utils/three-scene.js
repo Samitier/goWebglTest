@@ -9,7 +9,7 @@ export class ThreeScene {
 
         this.renderer = new WebGLRenderer(properties)
         this.renderer.setSize( window.innerWidth, window.innerHeight )
-        document.body.appendChild( this.renderer.domElement ) 
+        if(!properties.canvas) document.body.appendChild( this.renderer.domElement ) 
         window.addEventListener( 'resize', this.onResizeWindow.bind( this ), false )
     }
  

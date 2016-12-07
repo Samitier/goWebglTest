@@ -9,8 +9,8 @@ const   CUBE_SIZE = 24,
 
 export class IsometricMap extends ThreeScene {
     
-    constructor() {
-        super(true, { antialias: true })
+    constructor(canvas) {
+        super(true, { antialias: true, canvas })
         this.init()
     }
 
@@ -56,10 +56,9 @@ export class IsometricMap extends ThreeScene {
 
         //Raycast setup
         this.raycaster = new Raycaster()
-        this.mouse = { x: 0, y: 0 }
         this.intersectedObject = null
+        this.selectedObject = null
         this.isSelecting = false
-        document.addEventListener( 'mousemove', this.onDocumentMouseMove.bind(this), false )
 
         //Render setup
         this.renderer.setClearColor( 0x92ccdd )
@@ -73,21 +72,40 @@ export class IsometricMap extends ThreeScene {
             this.camera.position.z = Math.sin( this.time ) * CAMERA_Z
             this.camera.lookAt( this.scene.position )
         }
-        if(this.isSelecting) {
-            this.raycaster.setFromCamera( this.mouse, this.camera )
-            let intersection = this.raycaster.intersectObjects( this.scene.children )
+    }
 
-            if ( intersection.length > 0 ) {
-                if ( this.intersectedObject != intersection[0].object ) {
-                    if ( this.intersectedObject ) this.intersectedObject.material.color = new Color( 0xffffff )
-                    this.intersectedObject = intersection[0].object
-                    this.intersectedObject.material.color = new Color(0xaaaaaa)
-                }
-            } 
-            else {
-                if ( this.intersectedObject ) this.intersectedObject.material.color = new Color( 0xffffff )
-                this.intersectedObject = null
+    checkRaycastCollision(intersectedObject, isSelectingObject) {
+        this.raycaster.setFromCamera( this.mouse, this.camera )
+        let intersection = this.raycaster.intersectObjects( this.scene.children )
+
+        if ( intersection.length > 0 ) {
+            if ( intersectedObject != intersection[0].object ) {
+                if ( intersectedObject ) intersectedObject.material.color = new Color( 0xffffff )
+                intersectedObject = intersection[0].object
+                intersectedObject.material.color = isSelectingObject ? new Color( 0xAAAAAA ) : new Color( 0xeeeeee )
             }
+            else if(intersectedObject && isSelectingObject) {
+                intersectedObject.material.color = new Color( 0xffffff )
+                intersectedObject = null
+            }
+        } 
+        else if (intersectedObject) {
+            intersectedObject.material.color = new Color( 0xffffff )
+            intersectedObject = null
+        }
+        if(!isSelectingObject && this.selectedObject) this.selectedObject.material.color = new Color( 0xAAAAAA )
+        return intersectedObject
+    }
+
+    setRotateAnimation(isRotating) {
+        this.rotateAnimation = isRotating
+    }
+
+    setIsSelecting(isSelecting) {
+        this.isSelecting = isSelecting
+        if(!this.isSelecting && this.selectedObject) {
+            this.selectedObject.material.color = new Color( 0xffffff )
+            this.selectedObject = null
         }
     }
 
@@ -102,19 +120,22 @@ export class IsometricMap extends ThreeScene {
         super.resize()
     }
 
-    setRotateAnimation(isRotating) {
-        this.rotateAnimation = isRotating
-    }
-
-    setIsSelecting(isSelecting) {
-        this.isSelecting = isSelecting
-    }
-
-    onDocumentMouseMove( event ) {
+    onMouseMove(event) {
         if(!this.isSelecting) return
-        event.preventDefault()
-        this.mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1
-        this.mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1
+        this.mouse = {
+            x: ( event.clientX / window.innerWidth ) * 2 - 1,
+            y: - ( event.clientY / window.innerHeight ) * 2 + 1
+        }
+        this.intersectedObject = this.checkRaycastCollision(this.intersectedObject, false)
+    }
+
+    onMouseClick(event) {
+        if(!this.isSelecting) return
+        this.mouse = {
+            x: ( event.clientX / window.innerWidth ) * 2 - 1,
+            y: - ( event.clientY / window.innerHeight ) * 2 + 1
+        }
+        this.selectedObject = this.checkRaycastCollision(this.selectedObject, true)
     }
 
     getMap() {

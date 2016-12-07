@@ -8,7 +8,7 @@
     export default {
         components: {
         },
-        created: function() {
+        created() {
             let homeWebgl = new HomeWebgl()
         }
     }

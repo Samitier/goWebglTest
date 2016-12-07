@@ -7,7 +7,7 @@
     export default {
         components: {
         },
-        created: function() {
+        created() {
             let webgl = new AboutWebgl()
         }
     }

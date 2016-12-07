@@ -5,7 +5,7 @@
     "author": "Blai Samitier",
     "private": true,
     "scripts": {
-        "dev": "webpack --watch --progress --hide-modules"
+        "dev": "webpack-dev-server --inline --hot --history-api-fallback"
     },
     "dependencies": {
         "axios": "^0.15.2",

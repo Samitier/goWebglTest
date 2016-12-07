@@ -1,8 +1,12 @@
 <template>
-    <div class='action-buttons-container'>
-        <button class='rotate' @click="toggleRotate" v-bind:class="{ active: isRotating }"> Rotate </button>
-        <button class="edit" @click="toggleEdit" v-bind:class="{ active: isEditing }"> Edit </button>
-        <button class="reset">Reset</button>
+    <div>
+        <canvas v-bind:id="canvasClass" @mousemove="canvasMove" @click="canvasClick"></canvas>
+        <input class="input-slider" type="range"></input>
+        <div class='action-buttons-container'>
+            <button class='rotate' @click="toggleRotate" v-bind:class="{ active: isRotating }"> Rotate </button>
+            <button class="edit" @click="toggleEdit" v-bind:class="{ active: isEditing }"> Edit </button>
+            <button class="reset">Reset</button>
+        </div>
     </div>
 </template>
 
@@ -12,22 +16,31 @@
     export default {
         components: {
         },
-        created: function() {
-            this.isometricMap = new IsometricMap()
+        data() {
+            return {
+                canvasClass: 'isometric-map',
+                isometricMap: {},
+                isRotating: false,
+                isEditing: false
+            }
         },
-        data: () => ({
-            isometricMap: {},
-            isRotating: false,
-            isEditing: false
-        }),
+        mounted() {
+            this.isometricMap = new IsometricMap( document.getElementById(this.canvasClass) )
+        },
         methods: {
-            toggleRotate: function() {
+            toggleRotate() {
                 this.isRotating = !this.isRotating
                 this.isometricMap.setRotateAnimation(this.isRotating)
             },
-            toggleEdit: function() {
+            toggleEdit() {
                 this.isEditing = !this.isEditing
                 this.isometricMap.setIsSelecting(this.isEditing)
+            },
+            canvasMove(event) {
+                this.isometricMap.onMouseMove(event)
+            },
+            canvasClick(event) {
+                this.isometricMap.onMouseClick(event)
             }
         }
     }
@@ -52,7 +65,11 @@
         transition: all 0.5s;
         outline: 0!important;
     }
-    .action-buttons-container > button:hover, .action-buttons-container > button.active {
+    .action-buttons-container > button:hover {
+        box-shadow: inset 0px 0px 5px 0px rgba(0,0,0,0.55);
+    }
+    
+    .action-buttons-container > button.active {
         background-color: white;
         color: #444444;
     }
