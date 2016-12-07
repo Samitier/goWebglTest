@@ -5,7 +5,8 @@ const   CUBE_SIZE = 24,
         CAMERA_X = 200,
         CAMERA_Y = 150,
         CAMERA_Z = 200,
-        TIME_STEP = 0.01
+        TIME_STEP = 0.01,
+        MIN_SCALE = 0.01
 
 export class IsometricMap extends ThreeScene {
     
@@ -25,17 +26,19 @@ export class IsometricMap extends ThreeScene {
             map = this.getMap()
         for( let i = 0; i < map.length; ++i ) {
             for ( let j = 0; j < map[i].length; ++j ) {
-                let height = map[i][j]
-                if ( height != 0 ) {
-                    let material = new MeshLambertMaterial( { color: 0xffffff } ),
-                        cube = new Mesh( geometry, material ),
-                        xPos = ( j - Math.floor( map[i].length / 2 )) * CUBE_SIZE,
-                        yPos = CUBE_SIZE * ( height - 1 ) / 2,
-                        zPos = ( i - Math.floor( map.length / 2 )) * CUBE_SIZE
-                    cube.position.set( xPos, yPos, zPos)
-                    cube.scale.set( 1, height, 1 )
-                    this.scene.add( cube )
+                let height = map[i][j],
+                    material = new MeshLambertMaterial( { color: 0xffffff } ),
+                    cube = new Mesh( geometry, material )
+                if ( height <= MIN_SCALE ) {
+                    height = MIN_SCALE
+                    cube.material.visible = false
                 }
+                let xPos = ( j - Math.floor( map[i].length / 2 )) * CUBE_SIZE,
+                    yPos = CUBE_SIZE * ( height - 1 ) / 2,
+                    zPos = ( i - Math.floor( map.length / 2 )) * CUBE_SIZE
+                cube.position.set( xPos, yPos, zPos)
+                cube.scale.set( 1, height, 1 )
+                this.scene.add( cube )
             }
         }
 
@@ -80,20 +83,29 @@ export class IsometricMap extends ThreeScene {
 
         if ( intersection.length > 0 ) {
             if ( intersectedObject != intersection[0].object ) {
-                if ( intersectedObject ) intersectedObject.material.color = new Color( 0xffffff )
+                if ( intersectedObject ) {
+                    intersectedObject.material.color = new Color( 0xffffff )
+                    if(intersectedObject.scale.y <= MIN_SCALE) intersectedObject.material.visible = false
+                }
                 intersectedObject = intersection[0].object
                 intersectedObject.material.color = isSelectingObject ? new Color( 0xAAAAAA ) : new Color( 0xeeeeee )
+                intersectedObject.material.visible = true
             }
             else if(intersectedObject && isSelectingObject) {
                 intersectedObject.material.color = new Color( 0xffffff )
+                if(intersectedObject.scale.y <= MIN_SCALE) intersectedObject.material.visible = false
                 intersectedObject = null
             }
         } 
         else if (intersectedObject) {
             intersectedObject.material.color = new Color( 0xffffff )
+            if(intersectedObject.scale.y <= MIN_SCALE) intersectedObject.material.visible = false
             intersectedObject = null
         }
-        if(!isSelectingObject && this.selectedObject) this.selectedObject.material.color = new Color( 0xAAAAAA )
+        if(!isSelectingObject && this.selectedObject) {
+            this.selectedObject.material.color = new Color( 0xAAAAAA )
+            if(this.selectedObject.scale.y <= MIN_SCALE) this.selectedObject.material.visible = true
+        }
         return intersectedObject
     }
 
@@ -105,6 +117,7 @@ export class IsometricMap extends ThreeScene {
         this.isSelecting = isSelecting
         if(!this.isSelecting && this.selectedObject) {
             this.selectedObject.material.color = new Color( 0xffffff )
+            if(this.selectedObject.scale.y <= MIN_SCALE) this.selectedObject.material.visible = false
             this.selectedObject = null
         }
     }
@@ -140,20 +153,22 @@ export class IsometricMap extends ThreeScene {
 
     getMap() {
         return [
-            [2.0, 2.5, 2.5, 2.0, 1.5, 1.0, 1.5, 2.0, 0.0, 0.0, 1.5, 2.0, 2.5, 3.0],
-            [1.5, 2.0, 2.0, 1.0, 1.0, 1.0, 1.5, 1.5, 1.5, 1.0, 1.5, 1.5, 2.0, 2.5],
-            [0.0, 1.5, 1.5, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.5, 2.0, 2.0, 2.0],
-            [0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.5, 1.0, 1.0, 1.5, 1.5, 1.5, 1.5, 2.0],
-            [0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.5, 1.5, 1.5, 1.5, 1.0, 1.0, 1.0, 1.5],
-            [0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.5, 1.5, 1.5, 1.5, 1.0, 1.0, 1.0, 1.0],
-            [0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.5, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0],
-            [1.0, 1.0, 1.5, 2.0, 1.5, 1.0, 1.0, 1.5, 1.5, 1.0, 1.0, 1.0, 1.5, 1.5],
-            [1.0, 1.5, 1.5, 2.0, 2.5, 1.0, 1.5, 1.5, 1.5, 1.5, 1.0, 1.0, 1.5, 2.0],
-            [1.0, 1.5, 2.0, 2.0, 2.0, 1.0, 1.5, 2.0, 1.5, 1.5, 1.0, 1.0, 1.0, 1.5],
-            [0.0, 0.0, 2.0, 2.0, 2.0, 1.0, 1.5, 1.5, 1.5, 1.0, 1.0, 1.0, 1.0, 1.0],
-            [0.0, 1.5, 1.5, 1.5, 1.5, 1.0, 1.5, 1.5, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0],
-            [1.0, 1.5, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0],
-            [1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0],
+            [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+            [0.0, 2.0, 2.5, 2.5, 2.0, 1.5, 1.0, 1.5, 2.0, 0.0, 0.0, 1.5, 2.0, 2.5, 3.0, 0.0],
+            [0.0, 1.5, 2.0, 2.0, 1.0, 1.0, 1.0, 1.5, 1.5, 1.5, 1.0, 1.5, 1.5, 2.0, 2.5, 0.0],
+            [0.0, 0.0, 1.5, 1.5, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.5, 2.0, 2.0, 2.0, 0.0],
+            [0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.5, 1.0, 1.0, 1.5, 1.5, 1.5, 1.5, 2.0, 0.0],
+            [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.5, 1.5, 1.5, 1.5, 1.0, 1.0, 1.0, 1.5, 0.0],
+            [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.5, 1.5, 1.5, 1.5, 1.0, 1.0, 1.0, 1.0, 0.0],
+            [0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.5, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0],
+            [0.0, 1.0, 1.0, 1.5, 2.0, 1.5, 1.0, 1.0, 1.5, 1.5, 1.0, 1.0, 1.0, 1.5, 1.5, 0.0],
+            [0.0, 1.0, 1.5, 1.5, 2.0, 2.5, 1.0, 1.5, 1.5, 1.5, 1.5, 1.0, 1.0, 1.5, 2.0, 0.0],
+            [0.0, 1.0, 1.5, 2.0, 2.0, 2.0, 1.0, 1.5, 2.0, 1.5, 1.5, 1.0, 1.0, 1.0, 1.5, 0.0],
+            [0.0, 0.0, 0.0, 2.0, 2.0, 2.0, 1.0, 1.5, 1.5, 1.5, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0],
+            [0.0, 0.0, 1.5, 1.5, 1.5, 1.5, 1.0, 1.5, 1.5, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0],
+            [0.0, 1.0, 1.5, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0],
+            [0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0],
+            [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
         ]
     }
 }
