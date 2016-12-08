@@ -8,7 +8,7 @@ body {
 input[type=range].input-slider {
   -webkit-appearance: none;
   width: 100%;
-  margin: 7px 0;
+  margin-bottom: 12px;
 }
 input[type=range].input-slider:focus {
   outline: none;

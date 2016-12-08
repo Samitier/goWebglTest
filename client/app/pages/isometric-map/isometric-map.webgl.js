@@ -149,6 +149,7 @@ export class IsometricMap extends ThreeScene {
             y: - ( event.clientY / window.innerHeight ) * 2 + 1
         }
         this.selectedObject = this.checkRaycastCollision(this.selectedObject, true)
+        return this.selectedObject ? true : false
     }
 
     getMap() {

@@ -1,11 +1,15 @@
 <template>
     <div>
-        <canvas v-bind:id="canvasClass" @mousemove="canvasMove" @click="canvasClick"></canvas>
-        <input class="input-slider" type="range"></input>
+        <canvas :id="canvasClass" @mousemove="canvasMove" @click="canvasClick"></canvas>
         <div class='action-buttons-container'>
-            <button class='rotate' @click="toggleRotate" v-bind:class="{ active: isRotating }"> Rotate </button>
-            <button class="edit" @click="toggleEdit" v-bind:class="{ active: isEditing }"> Edit </button>
+            <button class='rotate' @click="toggleRotate" :class="{ active: isRotating }"> Rotate </button>
+            <button class="edit" @click="toggleEdit" :class="{ active: isEditing }"> Edit </button>
             <button class="reset">Reset</button>
+        </div>
+        <div class="height-slider-container" v-if="isObjectSelected">
+            <input v-model="selectedObjectHeight" @change="changeHeightSelectedObject"
+                   class="input-slider" type="range" min="0" max="15" step="0.1">
+            </input>
         </div>
     </div>
 </template>
@@ -21,7 +25,9 @@
                 canvasClass: 'isometric-map',
                 isometricMap: {},
                 isRotating: false,
-                isEditing: false
+                isEditing: false,
+                isObjectSelected: false,
+                selectedObjectHeight: 0
             }
         },
         mounted() {
@@ -35,19 +41,23 @@
             toggleEdit() {
                 this.isEditing = !this.isEditing
                 this.isometricMap.setIsSelecting(this.isEditing)
+                this.isObjectSelected = false
             },
             canvasMove(event) {
                 this.isometricMap.onMouseMove(event)
             },
             canvasClick(event) {
-                this.isometricMap.onMouseClick(event)
+                this.isObjectSelected = this.isometricMap.onMouseClick(event)
+            },
+            changeHeightSelectedObject() {
+                console.log(this.selectedObjectHeight)
             }
         }
     }
 </script>
 
 <style scoped>
-    .action-buttons-container {
+    .action-buttons-container, .height-slider-container {
         position:absolute;
         z-index:10;
         bottom: 80px;
@@ -68,9 +78,18 @@
     .action-buttons-container > button:hover {
         box-shadow: inset 0px 0px 5px 0px rgba(0,0,0,0.55);
     }
-    
     .action-buttons-container > button.active {
         background-color: white;
         color: #444444;
+    }
+    .height-slider-container {
+        bottom: 42px;
+        background-color: white;
+        width:150px;
+        padding: 2px;
+        margin-left:-76px;
+    }
+    .height-slider-container > input{
+        width:85%;
     }
 </style>
