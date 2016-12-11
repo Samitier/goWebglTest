@@ -7,8 +7,8 @@
             <button class="reset">Reset</button>
         </div>
         <div class="height-slider-container" v-if="isObjectSelected">
-            <input v-model="selectedObjectHeight" @change="changeHeightSelectedObject"
-                   class="input-slider" type="range" min="0" max="15" step="0.1">
+            <input v-model="selectedObjectHeight" @input="changeHeightSelectedObject"
+                   class="input-slider" type="range" min="0" max="15" step="0.25">
             </input>
         </div>
     </div>
@@ -47,10 +47,14 @@
                 this.isometricMap.onMouseMove(event)
             },
             canvasClick(event) {
+                if(!this.isEditing) return
                 this.isObjectSelected = this.isometricMap.onMouseClick(event)
+                if(this.isObjectSelected) {
+                    this.selectedObjectHeight = this.isometricMap.getSelectedObjectHeight()
+                }
             },
             changeHeightSelectedObject() {
-                console.log(this.selectedObjectHeight)
+                this.isometricMap.setSelectedObjectHeight(this.selectedObjectHeight)
             }
         }
     }
@@ -83,11 +87,22 @@
         color: #444444;
     }
     .height-slider-container {
-        bottom: 42px;
+        bottom: 35px;
         background-color: white;
         width:150px;
         padding: 2px;
         margin-left:-76px;
+        animation: fadeInDown 0.5s forwards;
+    }
+    .height-slider-container:after {
+        content: "";
+        position:absolute;
+        left:50%;
+        top:-10px;
+        margin-left:-10px;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 10px solid white;
     }
     .height-slider-container > input{
         width:85%;

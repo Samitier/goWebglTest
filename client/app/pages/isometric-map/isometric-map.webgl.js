@@ -33,10 +33,11 @@ export class IsometricMap extends ThreeScene {
                     height = MIN_SCALE
                     cube.material.visible = false
                 }
-                let xPos = ( j - Math.floor( map[i].length / 2 )) * CUBE_SIZE,
-                    yPos = CUBE_SIZE * ( height - 1 ) / 2,
-                    zPos = ( i - Math.floor( map.length / 2 )) * CUBE_SIZE
-                cube.position.set( xPos, yPos, zPos)
+                cube.position.set(
+                    CUBE_SIZE * ( j - Math.floor( map[i].length / 2 )),
+                    CUBE_SIZE * ( height - 1 ) / 2,
+                    CUBE_SIZE * ( i - Math.floor( map.length / 2 ))
+                )
                 cube.scale.set( 1, height, 1 )
                 this.scene.add( cube )
             }
@@ -120,6 +121,21 @@ export class IsometricMap extends ThreeScene {
             if(this.selectedObject.scale.y <= MIN_SCALE) this.selectedObject.material.visible = false
             this.selectedObject = null
         }
+    }
+
+    setSelectedObjectHeight(newHeight) {
+        if(!this.selectedObject) return
+        if(newHeight < MIN_SCALE) newHeight = MIN_SCALE
+        this.selectedObject.position.set(
+            this.selectedObject.position.x, 
+            CUBE_SIZE * ( newHeight - 1 ) / 2, 
+            this.selectedObject.position.z
+        )
+        this.selectedObject.scale.set( 1, newHeight, 1)
+    }
+
+    getSelectedObjectHeight() {
+        return this.selectedObject.scale.y
     }
 
     onResizeWindow() {
