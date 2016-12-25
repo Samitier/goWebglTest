@@ -1,7 +1,7 @@
-import {Scene, Color, PerspectiveCamera, BoxGeometry, ShaderMaterial, Mesh, WebGLRenderer} from "three"
+import { Color, PerspectiveCamera, BoxGeometry, ShaderMaterial, Mesh } from "three"
 import { ThreeScene } from "../../webgl-utils/three-scene.js"
  
-export class HomeWebgl extends ThreeScene {
+export class Scene extends ThreeScene {
     
     constructor() {
         super(true)

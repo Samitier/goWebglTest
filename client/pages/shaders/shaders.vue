@@ -3,13 +3,13 @@
 </template>
 
 <script>
-    import { HomeWebgl } from './home.webgl.js'
+    import { Scene } from './shaders.webgl.js'
 
     export default {
         components: {
         },
         created() {
-            let homeWebgl = new HomeWebgl()
+            let homeWebgl = new Scene()
         }
     }
 </script>

@@ -7,10 +7,10 @@ let release = process.argv.indexOf('--release') !== -1
 
 module.exports = {
     entry: {
-        app: './app/main.js'
+        app: './client/main.js'
     },
     output: {
-        path: path.resolve(__dirname, '../public'),
+        path: path.resolve(__dirname, './public'),
         publicPath: '/',
         filename: 'assets/[name].bundle.js'
     },
@@ -18,7 +18,7 @@ module.exports = {
         root: path.join(__dirname, 'node_modules'),
     },
     plugins: [
-        new HtmlWebpackPlugin({ template: './index.html', hash: true, filename: 'index.html' }),
+        new HtmlWebpackPlugin({ template: './client/index.html', hash: true, filename: 'index.html' }),
         new ExtractTextPlugin("assets/style.bundle.css", { allChunks: true })
     ],
     module: {

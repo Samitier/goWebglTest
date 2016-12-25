@@ -1,7 +1,43 @@
+
 body {
     margin:0px;
     overflow:hidden;
+    font-family: 'Hind', sans-serif;
 }
+
+/* ////////////// BOX SIZING FIX //////////////// */
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+/* //////////// TYPOGRAPHY & HEADINGS ////////// */
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Quicksand', serif;
+    font-weight: 400;
+}
+
+/* //////////// VIGNETTE EFFECT ///////////////// */
+
+.vignette:after {
+    -moz-box-shadow: inset 0 0 8em 10px #666;  
+    -webkit-box-shadow: inset 0 0 8em 10px #666;   
+    box-shadow: inset 0 0 8em 10px #666;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+    content: "";
+}
+
 
 /* /////////// CUSTOM INPUT - SLIDER ////////// */
 
@@ -90,6 +126,20 @@ input[type=range].input-slider:focus::-ms-fill-lower {
 input[type=range].input-slider:focus::-ms-fill-upper {
   background: #9ea8b2;
 }
+
+/* /////////// UTILITIES ////////// */
+
+.fullscreen {
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+}
+.fixed {
+    position: fixed;
+}
+
 
 /* /////////////////////// ANIMATIONS ///////////////////////////// */
 

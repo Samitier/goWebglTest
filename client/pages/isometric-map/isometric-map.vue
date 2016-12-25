@@ -15,7 +15,7 @@
 </template>
 
 <script>
-    import { IsometricMap } from './isometric-map.webgl.js'
+    import { Scene } from './isometric-map.webgl.js'
 
     export default {
         components: {
@@ -31,7 +31,7 @@
             }
         },
         mounted() {
-            this.isometricMap = new IsometricMap( document.getElementById(this.canvasClass) )
+            this.isometricMap = new Scene( document.getElementById(this.canvasClass) )
         },
         methods: {
             toggleRotate() {

@@ -1,7 +1,7 @@
-import { ObjectLoader, PerspectiveCamera, TorusGeometry, DirectionalLight, ShaderMaterial, Mesh } from "three"
+import { ObjectLoader, PerspectiveCamera, ShaderMaterial, Mesh } from "three"
 import { ThreeScene } from "../../webgl-utils/three-scene.js"
  
-export class AboutWebgl extends ThreeScene {
+export class Scene extends ThreeScene {
     
     constructor() {
         super(true)

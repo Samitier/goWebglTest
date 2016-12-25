@@ -2,13 +2,13 @@
 </template>
 
 <script>
-    import { AboutWebgl } from './about.webgl.js'
+    import { Scene } from './about.webgl.js'
 
     export default {
         components: {
         },
         created() {
-            let webgl = new AboutWebgl()
+            let webgl = new Scene()
         }
     }
 </script>

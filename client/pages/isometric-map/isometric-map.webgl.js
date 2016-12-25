@@ -8,7 +8,7 @@ const   CUBE_SIZE = 24,
         TIME_STEP = 0.01,
         MIN_SCALE = 0.01
 
-export class IsometricMap extends ThreeScene {
+export class Scene extends ThreeScene {
     
     constructor(canvas) {
         super(true, { antialias: true, canvas })
