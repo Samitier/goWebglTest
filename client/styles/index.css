@@ -158,9 +158,8 @@ input[type=range].input-slider:focus::-ms-fill-upper {
     left:0;
     right:0;
 }
-.fixed {
-    position: fixed;
-}
+.fixed { position: fixed }
+.text-center { text-align:center }
 
 
 /* /////////////////////// ANIMATIONS ///////////////////////////// */
