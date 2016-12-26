@@ -1,22 +1,21 @@
 <template>
-    <div>
-        <div class="fullscreen fixed vignette"></div>
-        <main class="main-ui-container">
-            <h1>
-                WebGL Rocks!<br>
-                <small>A creative programming blog</small>
-            </h1>
-            <div class="separator"></div>
-            <nav>
-                <a href="">> Articles</a>
-                <a href="">> Projects</a>
-                <a href="">> This site</a>
-                <a href="">> The author</a>
+    <div class="container h-center v-center fullscreen">
+        <div class="container main-ui-container">
+            <header class="row-12">
+                <h1>WebGL Rocks!</h1>
+                <h2>A creative programming blog</h2>
+                <div class="separator"></div>
+            </header>
+            <nav class="row-5">
+                <a v-for="(item, i) in menuItems" @mouseover="showInfo(i)" :class="{ active: showingInfo == i }"> 
+                    > {{ item }} 
+                </a>
             </nav>
-            <details>
-
-            </details>  
-        </main>
+            <main class="row-7" v-show="showingInfo!=-1">
+                ola
+            </main>  
+        </div>
+        <div class="fullscreen fixed vignette"></div>
     </div>
 </template>
 
@@ -25,33 +24,56 @@
  export default {
         components: {
         },
+        data() {
+            return {
+                showingInfo: -1,
+                menuItems: [
+                    "Articles",
+                    "Projects",
+                    "This site",
+                    "The author"
+                ]
+            }
+        },
         created() {
+        },
+        methods: {
+            showInfo(info) {
+                this.showingInfo = info
+            }
         }
     }
 </script>
 
 <style scoped>
-
     .main-ui-container {
         width: 500px;
-        margin: auto;
-        transform: translateY(46%);
-        text-align:center;
+        height:500px;
     }
     h1 {
         font-family: 'Quicksand', sans-serif;
         text-align: center;
-        display:block;
-        width: 100%;
         font-size: 70px;
-        line-height: 0.6;
+        margin:5px;
     }
-    h1 > small {
+    h2 {
+        font-family: 'Quicksand', sans-serif;
+        text-align: center;
         font-size:29px;
+        margin:0;
     }
-    a {
+    h1,h2 { line-height: 1 }
+    .separator {
+        width:50px;
+        margin: auto;
+        margin-top:2em;
+        border-top:1px solid #444444;
+    }
+    nav {
+        padding-left:1.5em;
+    }
+    nav > a {
         font-family: 'Droid Sans Mono', monospace;
-        width: 90%;
         display: block;
         text-align: left;
         text-decoration: none;
@@ -59,14 +81,34 @@
         font-size:17px;
         padding: 0.5em 1em;
         margin: 1em auto;
+        position: relative;
+        opacity: 0.3;
+        cursor:pointer;
+        transition: opacity 0.4s;
     }
-    .separator {
-        width:50px;
-        padding-bottom:3em;
-        margin:auto;
-        border-top:1px solid #444444;
+    nav > a:hover, nav > a.active { opacity: 1 } 
+    nav > a.active:after {
+        position:absolute;
+        right:0px;
+        top:0.85em;
+        content:""; 
+        border-top: 4px solid transparent;
+        border-bottom: 4px solid transparent; 
+        border-right: 4px solid black; 
     }
-    nav {
-        display:inline
+    main {
+        border-left: 1px solid black;
+        padding-left: 1.5em;
+        height: 240px;
     }
+    .fullscreen.vignette { z-index: -1 }
+
+    /*  //// ANIMATIONS //// */
+
+    .fullscreen.vignette { animation: fadeIn 1.5s }
+    header { 
+        opacity: 0;
+        animation: fadeIn 1.5s 0.5s forwards;
+    }
+
 </style>
