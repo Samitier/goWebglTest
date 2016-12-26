@@ -70,7 +70,7 @@
         border-top:1px solid #444444;
     }
     nav {
-        padding-left:1.5em;
+        padding-left:2em;
     }
     nav > a {
         font-family: 'Droid Sans Mono', monospace;
@@ -82,11 +82,10 @@
         padding: 0.5em 1em;
         margin: 1em auto;
         position: relative;
-        opacity: 0.3;
+        color: #ddd;
         cursor:pointer;
-        transition: opacity 0.4s;
     }
-    nav > a:hover, nav > a.active { opacity: 1 } 
+    nav > a:hover, nav > a.active { color: black } 
     nav > a.active:after {
         position:absolute;
         right:0px;
@@ -99,7 +98,6 @@
     main {
         border-left: 1px solid black;
         padding-left: 1.5em;
-        height: 240px;
     }
     .fullscreen.vignette { z-index: -1 }
 
@@ -110,5 +108,13 @@
         opacity: 0;
         animation: fadeIn 1.5s 0.5s forwards;
     }
-
+    nav > a {
+        transition: color 0.4s;
+        opacity: 0;
+        animation: fadeIn 0.4s forwards;
+    }
+    nav > a:nth-child(1) { animation-delay: 0.8s }
+    nav > a:nth-child(2) { animation-delay: 0.9s }
+    nav > a:nth-child(3) { animation-delay: 1.0s }
+    nav > a:nth-child(4) { animation-delay: 1.1s }
 </style>
