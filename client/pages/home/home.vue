@@ -12,8 +12,9 @@
                 </a>
             </nav>
             <main class="row-7" v-show="showingInfo!=-1">
-                ola
-            </main>  
+                <h3>Lorem ipsum</h3>
+                Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.
+            </main>   
         </div>
         <div class="fullscreen fixed vignette"></div>
     </div>
@@ -98,6 +99,10 @@
     main {
         border-left: 1px solid black;
         padding-left: 1.5em;
+    }
+    main>h3 {
+        font-size:30px;
+        margin:0;
     }
     .fullscreen.vignette { z-index: -1 }
 
