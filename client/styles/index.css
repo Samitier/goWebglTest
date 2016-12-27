@@ -31,18 +31,18 @@ h1, h2, h3, h4, h5, h6 {
 
 .h-center { justify-content: center }
 .v-center { align-items: center }
-.row-1 { width: 8.333% }
-.row-2 { width: 16.666% }
-.row-3 { width: 24.999% }
-.row-4 { width: 33.333% }
-.row-5 { width: 41.666% }
-.row-6 { width: 50% }
-.row-7 { width: 58.333% }
-.row-8 { width: 66.666% }
-.row-9 { width: 74.999% }
-.row-10 { width: 83.333% }
-.row-11 { width: 91.666% }
-.row-12 { width: 100% }
+.col-1 { width: 8.333% }
+.col-2 { width: 16.666% }
+.col-3 { width: 24.999% }
+.col-4 { width: 33.333% }
+.col-5 { width: 41.666% }
+.col-6 { width: 50% }
+.col-7 { width: 58.333% }
+.col-8 { width: 66.666% }
+.col-9 { width: 74.999% }
+.col-10 { width: 83.333% }
+.col-11 { width: 91.666% }
+.col-12 { width: 100% }
 
 /* //////////// VIGNETTE EFFECT ///////////////// */
 
@@ -60,6 +60,20 @@ h1, h2, h3, h4, h5, h6 {
     content: "";
 }
 
+/* /////////// SPECIFIC CLASSES //////////// */
+
+.section-heading {
+    font-size:30px;
+    margin:0;
+    margin-bottom: -10px;
+}
+  .category-icon {
+      display:block;
+      width: 42px;
+      height: 42px;
+      padding:10px; 
+      border: 2px solid black;
+  }
 
 /* /////////// CUSTOM INPUT - SLIDER ////////// */
 
@@ -160,14 +174,7 @@ input[type=range].input-slider:focus::-ms-fill-upper {
 }
 .fixed { position: fixed }
 .text-center { text-align:center }
-
-
-/* /////////// SPECIFIC CLASSES //////////// */
-.section-heading {
-    font-size:30px;
-    margin:0;
-    margin-bottom: -10px;
-}
+.inline-block { display: inline-block }
 
 
 /* /////////////////////// ANIMATIONS ///////////////////////////// */

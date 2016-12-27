@@ -6,8 +6,8 @@
             UI/UX design and programming videogames.
         </p>
         <p>
-            I am a self learner, and I'm always trying to improve on what I know, and try to learn from other
-            people. And I think that learning and creativity are two things you shouldn't stop developing.
+            I am a self learner, and I'm always trying to learn new tricks and technologies. 
+            I think that learning and creativity are two things you should never stop developing.
         </p>
             Please visit my (outdated) <a href="http://samitier.me/">web portfolio</a> if you want to know me better. 
             And I'm always open to talk about anything, you can find me here:
