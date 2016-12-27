@@ -1,17 +1,17 @@
 <template>
     <div class="container h-center v-center fullscreen">
         <div class="container main-ui-container">
-            <header class="main-title row-12">
+            <header class="main-title col-12">
                 <h1>WebGL Rocks!</h1>
                 <h2>A creative programming blog</h2>
                 <div class="separator"></div>
             </header>
-            <nav class="row-5">
+            <nav class="col-5">
                 <a v-for="(item, i) in menuItems" @mouseover="showInfo(i)" :class="{ active: showingInfo == i }"> 
                     > {{ item }} 
                 </a>
             </nav>
-            <main class="row-7">
+            <main class="col-7">
                 <div v-if="showingInfo==0">
                     <article-list></article-list>
                 </div>
