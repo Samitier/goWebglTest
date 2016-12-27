@@ -25,7 +25,7 @@
                 <div v-if="showingInfo==1">
                     <h3>Finished projects</h3>
                     <div class="container projects-container">
-                         <a class="project-link text-center" v-for="project in projects" :href="project.link">
+                         <a class="project-link text-center row-3" v-for="project in projects" :href="project.link">
                             <i>X</i>
                             <span>{{ project.title }}</span>
                          </a>           
@@ -42,8 +42,13 @@
                         <b>projects</b>, where the finished results will be.
                     </p>
                     <p>
-                        Everything in this site is avaliable on <a href="https://github.com/">Github</a>. 
-                        If you want to contribute, please do it. The best way of learning is learning together.
+                        Everything in this site is avaliable on <a href="https://github.com/Samitier/webgl.rocks">Github</a>. 
+                        If you want to <a href="https://github.com/Samitier/webgl.rocks/wiki">contribute</a>, please do it. 
+                        The best way of learning is learning together.
+                    </p>
+                    <p>
+                        If you like this site, <a href="http://samitier.azurewebsites.net/">please leave a message</a>. 
+                        It means a lot to me.
                     </p>
                 </div>
                 <div v-if="showingInfo==3">
@@ -53,7 +58,11 @@
                         UI/UX design and programming videogames.
                     </p>
                     <p>
-                        
+                        I am a self learner, and I'm always trying to improve on what I know, and try to learn from other
+                        people. And I think that learning and creativity are two things you shouldn't stop developing.
+                    </p>
+                        Please visit my (outdated) <a href="http://samitier.me/">web portfolio</a> if you want to know me better. 
+                        And I'm always open to talk about anything, you can find me here:
                     </p>
                 </div>
             </main>   
@@ -63,7 +72,6 @@
 </template>
 
 <script>
-
  export default {
         components: {
         },
@@ -161,21 +169,25 @@
         margin:0;
         margin-bottom: -10px;
     }
-    .projects-container { margin-top: 10px }
+    .projects-container { margin-top: 15px }
     .project-link {
-        margin:5px;
         cursor: pointer;
+        text-decoration: none;
+        color: black;
     }
     .project-link > i {
         display:block;
-        width: 50px;
-        height: 50px;
+        width: 40px;
+        height: 40px;
+        padding:10px; 
+        margin:auto;
         border: 2px solid black;
     }
     .project-link > span {
         display: block;
         font-size:11px;
-        margin-top:5px;
+        margin-top:7px;
+        line-height: 1;
     }
     .fullscreen.vignette { z-index: -1 }
 
