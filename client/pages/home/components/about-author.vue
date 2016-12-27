@@ -1,0 +1,27 @@
+<template>
+    <div>
+        <h3 class="section-heading">About the author</h3>
+        <p>
+            Hi, my name is Blai Samitier. I'm a software engineer from Barcelona. I love front-end development, 
+            UI/UX design and programming videogames.
+        </p>
+        <p>
+            I am a self learner, and I'm always trying to improve on what I know, and try to learn from other
+            people. And I think that learning and creativity are two things you shouldn't stop developing.
+        </p>
+            Please visit my (outdated) <a href="http://samitier.me/">web portfolio</a> if you want to know me better. 
+            And I'm always open to talk about anything, you can find me here:
+        </p>
+    </div>
+</template>
+
+<script>
+    export default {
+        components: {
+        }
+    }
+</script>
+
+<style scoped>
+    
+</style>

@@ -13,57 +13,16 @@
             </nav>
             <main class="row-7">
                 <div v-if="showingInfo==0">
-                    <h3>Latest articles</h3>
-                    <div class="container projects-container">
-                        <article v-for="article in articles">
-                            <i>x</i>
-                            <header>{{ article.title }}</header>
-                            <div></div>
-                        </article>
-                    </div>
+                    <article-list></article-list>
                 </div>
                 <div v-if="showingInfo==1">
-                    <h3>Finished projects</h3>
-                    <div class="container projects-container">
-                         <a class="project-link text-center row-3" v-for="project in projects" :href="project.link">
-                            <i>X</i>
-                            <span>{{ project.title }}</span>
-                         </a>           
-                    </div>
+                    <project-list></project-list>
                 </div>
                 <div v-if="showingInfo==2">
-                    <h3>About this site</h3>
-                    <p>
-                        Webgl.rocks is an excuse for sharing with you what I learn in my small pet projects about WebGL
-                        and front-end design.
-                    </p>
-                    <p>
-                        The site is divided in two categories: <b>articles</b>, where I describe how I code, and
-                        <b>projects</b>, where the finished results will be.
-                    </p>
-                    <p>
-                        Everything in this site is avaliable on <a href="https://github.com/Samitier/webgl.rocks">Github</a>. 
-                        If you want to <a href="https://github.com/Samitier/webgl.rocks/wiki">contribute</a>, please do it. 
-                        The best way of learning is learning together.
-                    </p>
-                    <p>
-                        If you like this site, <a href="http://samitier.azurewebsites.net/">please leave a message</a>. 
-                        It means a lot to me.
-                    </p>
+                    <about-site></about-site>
                 </div>
                 <div v-if="showingInfo==3">
-                    <h3>About the author</h3>
-                    <p>
-                        Hi, my name is Blai Samitier. I'm a software engineer from Barcelona. I love front-end development, 
-                        UI/UX design and programming videogames.
-                    </p>
-                    <p>
-                        I am a self learner, and I'm always trying to improve on what I know, and try to learn from other
-                        people. And I think that learning and creativity are two things you shouldn't stop developing.
-                    </p>
-                        Please visit my (outdated) <a href="http://samitier.me/">web portfolio</a> if you want to know me better. 
-                        And I'm always open to talk about anything, you can find me here:
-                    </p>
+                    <about-author></about-author>
                 </div>
             </main>   
         </div>
@@ -72,8 +31,17 @@
 </template>
 
 <script>
- export default {
+    import ArticleList from './components/article-list.vue'
+    import ProjectList from './components/project-list.vue'
+    import AboutSite from './components/about-site.vue'
+    import AboutAuthor from './components/about-author.vue'
+
+    export default {
         components: {
+            ArticleList,
+            ProjectList,
+            AboutSite,
+            AboutAuthor
         },
         data() {
             return {
@@ -83,15 +51,8 @@
                     "Projects",
                     "This site",
                     "The author"
-                ],
-                projects: [
-                    { title: "Shaders", link: '/shaders' },
-                    { title: "Isometric Map", link: '/isometric-map' },
-                    { title: "Models", link: "/about" }
                 ]
             }
-        },
-        created() {
         },
         methods: {
             showInfo(info) {
@@ -164,31 +125,6 @@
         line-height:1.4;
         font-size:15px;
     }
-    main>div>h3 {
-        font-size:30px;
-        margin:0;
-        margin-bottom: -10px;
-    }
-    .projects-container { margin-top: 15px }
-    .project-link {
-        cursor: pointer;
-        text-decoration: none;
-        color: black;
-    }
-    .project-link > i {
-        display:block;
-        width: 40px;
-        height: 40px;
-        padding:10px; 
-        margin:auto;
-        border: 2px solid black;
-    }
-    .project-link > span {
-        display: block;
-        font-size:11px;
-        margin-top:7px;
-        line-height: 1;
-    }
     .fullscreen.vignette { z-index: -1 }
 
     /*  //// ANIMATIONS //// */
@@ -207,7 +143,5 @@
     nav > a:nth-child(2) { animation-delay: 0.9s }
     nav > a:nth-child(3) { animation-delay: 1.0s }
     nav > a:nth-child(4) { animation-delay: 1.1s }
-    main>div {
-        animation: fadeInDown 0.5s;
-    }
+    main>div { animation: fadeInDown 0.5s }
 </style>

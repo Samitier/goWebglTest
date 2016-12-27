@@ -162,6 +162,14 @@ input[type=range].input-slider:focus::-ms-fill-upper {
 .text-center { text-align:center }
 
 
+/* /////////// SPECIFIC CLASSES //////////// */
+.section-heading {
+    font-size:30px;
+    margin:0;
+    margin-bottom: -10px;
+}
+
+
 /* /////////////////////// ANIMATIONS ///////////////////////////// */
 
 @keyframes fadeIn {
