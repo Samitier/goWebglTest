@@ -82,3 +82,4 @@ public/index.html
 .vscode
 public/assets/style.bundle.css
 public/assets/app.bundle.js
+.env

@@ -1,4 +1,3 @@
-"use strict"
 let pjson   = require('../package.json'),
     router  = require('express').Router()
 

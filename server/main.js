@@ -1,3 +1,5 @@
+require('dotenv').config({ path: __dirname + '/.env' })
+
 let express      = require('express'),
     path         = require('path'),
     favicon      = require('serve-favicon'),
@@ -5,9 +7,9 @@ let express      = require('express'),
     cookieParser = require('cookie-parser'),
     bodyParser   = require('body-parser'),
     compress     = require('compression'),
-    debug        = require('debug')('server'),
     http         = require('http'),
-    routes       = require('./routes')
+    routes       = require('./routes'),
+    db           = require('./database/dbconfig')
 
 let app          = express(),
     port         = parseInt(process.env.PORT, 10) || 3000
@@ -41,4 +43,4 @@ app.use( (err, req, res)  => {
 
 let server = http.createServer(app)
 server.listen(port)
-server.on('listening', () => debug('Listening on ' + server.address().port || server.address()) )
+server.on('listening', () => console.log(`Listening on ${ server.address().port || server.address() }`))
