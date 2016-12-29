@@ -1,5 +1,5 @@
 module.exports = db => {
-    return Promise.all(
+    return Promise.all([
         new Promise((resolve, reject) => {
              db.article.findOrCreate({
                 where:    { slug: 'lorem-ipsum' },
@@ -9,11 +9,12 @@ module.exports = db => {
                     body: "Lorem ipsum",
                     projectCode: "FA342B"
                 }
-            })
-            .spread((obj, created) => {
-                if (created) console.log(" * Category [" + obj.dataValues.name + "] seeded")
+            }).spread((obj, created) => {
+                if (created) console.log("[seed] -> Article [" + obj.dataValues.title + "] seeded")
                 resolve()
             })
         })
-    ).then( () => console.log("--Articles seeded successfully--"))
+    ])
+    .then( () => console.log("[seed] -> Articles seeded successfully"))
+    .catch( () => console.log("[seed] -> Error seeding articles"))
 }

@@ -7,22 +7,19 @@ let Sequelize = require('sequelize'),
     sequelize;
 
 try {
-    if(process.env.ENV=="release") {
-        sequelize = new Sequelize(process.env.DATABASE_URL, {
-            dialect:  'postgres',
-            protocol: 'postgres',
-            logging:   process.env.DATABASE_LOGGING ? console.log : false,
-            dialectOptions: { ssl: true }
-        })
-    }
-    else sequelize = new Sequelize(process.env.DATABASE_URL, { logging: process.env.DATABASE_LOGGING=="true" })
+    sequelize = new Sequelize(process.env.DATABASE_URL, {
+        dialect:  'postgres',
+        protocol: 'postgres',
+        logging:   process.env.DATABASE_LOGGING ? (msg) => console.log(`[DBlog] -> ${msg}\n`) : false,
+        dialectOptions: { ssl: process.env.DATABASE_SSL || true }
+    })
 }
 catch (err) {
-    console.log("Error connecting to the database. Invalid connection string.", err)
+    console.log("[DB] -> Error connecting to the database. Invalid connection string.", err)
 }
 
 if (sequelize) {
-    console.log("Connected to the database successfully.")
+    console.log("[DB] -> Connected to the database successfully.")
 
     //Loading models
     fs.readdirSync(path.join(__dirname, modelsDir))
@@ -43,10 +40,10 @@ if (sequelize) {
     //Clearing db & seeding
     sequelize.sync({ force: process.env.MIGRATIONS_ALLOW_DATA_LOSS === 'true' || false }).then( 
         () => {
-            console.log(`Database ${ process.env.MIGRATIONS_ALLOW_DATA_LOSS === 'true' ? "CLEARED and " : "" } synchronized`)
+            console.log(`[DB] -> Database ${ process.env.MIGRATIONS_ALLOW_DATA_LOSS === 'true' ? "CLEARED and " : "" } synchronized`)
             if (process.env.MIGRATIONS_ALLOW_DATA_LOSS === 'true') seed(db)
         }
-    ).catch( err => console.log("An error occurred: ", err) )
+    ).catch( err => console.log("[DB] -> An error occurred: ", err) )
 }
 
 module.exports = db
