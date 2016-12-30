@@ -1,10 +1,14 @@
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define('project', {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true 
+        },
         code:           {
             type:       DataTypes.STRING,
             allowNull:  false,
             unique:     true,
-            primaryKey: true,
         },
         title:           {
             type:      DataTypes.STRING,
@@ -17,8 +21,5 @@ module.exports = (sequelize, DataTypes) => {
         link:  {
             type: DataTypes.STRING
         }
-    },
-    {
-        associate:  (models) => {}
     })
 }

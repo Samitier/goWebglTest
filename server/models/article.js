@@ -1,10 +1,14 @@
 module.exports = (sequelize, DataTypes) => {
     let article =  sequelize.define('article', {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true 
+        },
         slug:           {
             type:       DataTypes.STRING,
             allowNull:  false,
             unique:     true,
-            primaryKey: true,
         },
         title:           {
             type:      DataTypes.STRING,

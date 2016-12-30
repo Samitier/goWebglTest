@@ -4,7 +4,7 @@ let Sequelize = require('sequelize'),
     seed      = require("./seeds"),
     modelsDir = "../models",
     db        = {},
-    sequelize;
+    sequelize
 
 try {
     sequelize = new Sequelize(process.env.DATABASE_URL, {
@@ -32,18 +32,13 @@ if (sequelize) {
 
     //Creating relationships
     Object.keys(db).forEach( modelName => {
-        if (db[modelName].options.hasOwnProperty('associate')) {
-            db[modelName].options.associate(db)
-        }
+        if (db[modelName].options.hasOwnProperty('associate'))  db[modelName].options.associate(db)
     })
 
     //Clearing db & seeding
-    sequelize.sync({ force: process.env.MIGRATIONS_ALLOW_DATA_LOSS === 'true' || false }).then( 
-        () => {
-            console.log(`[DB] -> Database ${ process.env.MIGRATIONS_ALLOW_DATA_LOSS === 'true' ? "CLEARED and " : "" } synchronized`)
-            if (process.env.MIGRATIONS_ALLOW_DATA_LOSS === 'true') seed(db)
-        }
-    ).catch( err => console.log("[DB] -> An error occurred: ", err) )
+    sequelize.sync({ force: process.env.MIGRATIONS_ALLOW_DATA_LOSS === 'true' })
+    .then( () => process.env.MIGRATIONS_ALLOW_DATA_LOSS === 'true' ? seed(db) : "")
+    .catch( err => console.log("[DB] -> An error occurred: ", err) )
 }
 
 module.exports = db

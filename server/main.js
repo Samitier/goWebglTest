@@ -28,7 +28,10 @@ app.set('port', port)
 //// ROUTE HANDLERS ////
 
 app.use('/api', routes)
-app.use( (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')) )
+app.use( (req, res) => {
+    if(req.originalUrl.indexOf('/backend') !== -1) res.sendFile(path.join(__dirname, '../public/backend.html')) 
+    else res.sendFile(path.join(__dirname, '../public/index.html')) 
+})
 
 //// ERROR HANDLER ////
 
