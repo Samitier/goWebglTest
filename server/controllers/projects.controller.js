@@ -13,5 +13,14 @@ module.exports = {
             data => httpResult.ok(res, data), 
             error => httpResult.error(res, error)
         )
+    },
+    put(req, res) {
+        httpResult.ok(res, "PUT")
+    },
+    post(req, res) {
+        httpResult.ok(res, "POST")
+    },
+    delete(req, res) {
+        httpResult.ok(res, "DELETE")
     }
 }
