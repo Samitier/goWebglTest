@@ -6,6 +6,9 @@ let pjson   = require('../package.json'),
 /* GET API info. */
 router.get('/', (req, res) => httpResult.ok(res,'Welcome to the web API for WebglRocks v' + pjson.version))
 
+/*Auth */
+router.post('/login', ctrl.auth.login)
+
 /* Projects */
 router.route('/projects')
       .get(ctrl.projects.getAll)

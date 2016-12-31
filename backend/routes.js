@@ -8,8 +8,7 @@ let routes = [
     { path: '*', component: NotFound, name: 'notFound' } 
 ]
 
-
-/* Setting the /backend/ before every route path */
+/* Setting '/backend/' before every route path defined */
 let root = '/backend' 
 for(let route of routes) route.path = root + route.path 
 export default routes

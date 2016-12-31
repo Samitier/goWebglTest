@@ -15,6 +15,13 @@ const router = new VueRouter({
     routes
 })
 
+router.beforeEach((to, from, next) => {
+    let isLoggedIn = apiService.getApiToken()
+    if(to.name === 'login' && isLoggedIn) next({ name: 'home' })
+    else if(to.name !== 'login' && !isLoggedIn) next({ name: 'login' })
+    else next()
+})
+
 new Vue({ 
     el: '#app',
     router,

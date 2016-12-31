@@ -7,7 +7,7 @@
         <div class="col-12 text-center">
             <h3> Who are you? </h3>   
             <input class="input-text inline-block" v-model="password" type="password">
-            <i :class="{ show: password != '' }" class="btn icon-ok"></i>
+            <i :class="{ show: password != '' }" @click="submit()" class="btn icon-ok"></i>
         </div>
     </main>
 </template>
@@ -27,8 +27,8 @@
         },
         methods: {
             submit() {
-                api.login(password).then(
-                    ok => console.log(this)
+                api.login(this.password).then(
+                    ok => this.$router.replace({ name: 'home' })
                 )
             }
         }
