@@ -9,8 +9,8 @@
             I am a self learner, and I'm always trying to learn new tricks and technologies. 
             I think that learning and creativity are two things you should never stop developing.
         </p>
-            Please visit my (outdated) <a href="http://samitier.me/">web portfolio</a> if you want to know me better. 
-            And I'm always open to talk about anything, you can find me here:
+            Please visit my <a href="http://samitier.me/">web portfolio</a> if you want to know me better. 
+            I'm always open to talk about anything, so feel free to send me a message!
         </p>
     </div>
 </template>

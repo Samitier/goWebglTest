@@ -1,6 +1,11 @@
 require('../client/styles/index.css')
 import Vue from 'vue'
+import VueResource from 'vue-resource'
 import routes from './routes'
+import apiService from './services/api.vue'
+
+Vue.use(VueResource)
+apiService.init(Vue)
 
 const app = new Vue({
     el: '#app',

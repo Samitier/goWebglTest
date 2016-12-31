@@ -34,6 +34,11 @@
     .article-link {
         color: black;
         margin-bottom: 1em;
+        cursor: pointer;
+        transition: transform 0.3s;
+    }
+    .article-link:hover {
+        transform:translateX(10px);
     }
     .article-info {
         margin:auto;

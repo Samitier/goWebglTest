@@ -12,8 +12,7 @@
         <p>
             Everything in this site is avaliable on <a href="https://github.com/Samitier/webgl.rocks">Github</a>. 
             If you want to <a href="https://github.com/Samitier/webgl.rocks/wiki">contribute</a>, please do it. 
-            The best way of learning is learning together. And if you like this site, 
-            you can leave me a nice message <a href="http://samitier.azurewebsites.net/">here</a>.
+            The best way of learning is learning together. 
         </p>
     </div>
 </template>

@@ -2,7 +2,7 @@
     <div>
         <h3 class="section-heading">Finished projects</h3>
         <div class="container projects-container">
-            <a class="project-link col-3" v-for="project in projects" :href="project.link">
+            <a class="btn project-link col-3" v-for="project in projects" :href="project.link">
                 <i class="category-icon">{{ project.icon }}</i>
                 <span>{{ project.title }}</span>
             </a>           
@@ -31,15 +31,15 @@
 
 <style scoped>
     .projects-container { margin-top: 20px }
-    .project-link {
-        cursor: pointer;
-        text-decoration: none;
-        color: black;
-    }
     .project-link > span {
         display: block;
         font-size:11px;
         margin: 7px 0px 10px 0px;
         line-height: 1;
+    }
+    .category-icon, .project-link span { transition: transform 0.3s }
+    .project-link:hover span { transform: translateY(2px) }
+    .project-link:hover .category-icon {
+        transform: scale(1.15);
     }
 </style>

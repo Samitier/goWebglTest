@@ -60,6 +60,22 @@ h1, h2, h3, h4, h5, h6 {
     content: "";
 }
 
+/* //////////// MAIN LOGO ///////////// */
+
+.main-logo h1 {
+    font-family: 'Quicksand', sans-serif;
+    text-align: center;
+    font-size: 70px;
+    margin:5px;
+}
+.main-logo h2 {
+    font-family: 'Quicksand', sans-serif;
+    text-align: center;
+    font-size:29px;
+    margin:0;
+}
+.main-logo h1, .main-logo h2 { line-height: 1 }
+
 /* /////////// SPECIFIC CLASSES //////////// */
 
 .section-heading {
@@ -67,13 +83,18 @@ h1, h2, h3, h4, h5, h6 {
     margin:0;
     margin-bottom: -10px;
 }
-  .category-icon {
-      display:block;
-      width: 42px;
-      height: 42px;
-      padding:10px; 
-      border: 2px solid black;
-  }
+.category-icon {
+    display:block;
+    width: 42px;
+    height: 42px;
+    padding:10px; 
+    border: 2px solid black;
+}
+.btn {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
 
 /* /////////// CUSTOM INPUT - SLIDER ////////// */
 
