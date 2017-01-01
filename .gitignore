@@ -79,6 +79,9 @@ $RECYCLE.BIN/
 .bundle.js
 .bundle.css
 public/index.html
+public/backend.html
 .vscode
 public/assets/style.bundle.css
 public/assets/app.bundle.js
+public/assets/backend.bundle.js
+.env

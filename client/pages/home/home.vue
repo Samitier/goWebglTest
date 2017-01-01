@@ -1,30 +1,44 @@
 <template>
-    <div class="container h-center v-center fullscreen">
+    <div class="container h-center v-center fullscreen site-container">
         <div class="container main-ui-container">
-            <header class="main-title col-12">
+            <header class="main-logo col-12" @mouseover="showInfo(-1)">
                 <h1>WebGL Rocks!</h1>
                 <h2>A creative programming blog</h2>
                 <div class="separator"></div>
             </header>
-            <nav class="col-5">
-                <a v-for="(item, i) in menuItems" @mouseover="showInfo(i)" :class="{ active: showingInfo == i }"> 
-                    > {{ item }} 
-                </a>
-            </nav>
-            <main class="col-7">
-                <div v-if="showingInfo==0">
-                    <article-list></article-list>
+            <transition name="hide-left">
+                <div class="col-12 content-container container" v-show="renderMainMenu">
+                    <nav class="main-menu col-5">
+                        <a  v-for="(item, i) in menuItems" 
+                            @mouseover="showInfo(i)" :class="{ active: showingInfo == i }" class="btn"> 
+                            > {{ item }} 
+                        </a>
+                    </nav>
+                    <div class="info-container col-7">
+                        <div v-if="showingInfo==-1">
+                            <social-links></social-links>
+                        </div>
+                        <div class="border-left" v-if="showingInfo==0">
+                            <article-list></article-list>
+                        </div>
+                        <div class="border-left" v-if="showingInfo==1">
+                            <project-list @select-project="selectProject"></project-list>
+                        </div>
+                        <div class="border-left" v-if="showingInfo==2">
+                            <about-site></about-site>
+                        </div>
+                        <div class="border-left" v-if="showingInfo==3">
+                            <about-author></about-author>
+                        </div>
+                    </div>  
                 </div>
-                <div v-if="showingInfo==1">
-                    <project-list></project-list>
-                </div>
-                <div v-if="showingInfo==2">
-                    <about-site></about-site>
-                </div>
-                <div v-if="showingInfo==3">
-                    <about-author></about-author>
-                </div>
-            </main>   
+            </transition>
+
+            <project-info 
+                :project="selectedProject" 
+                :is-rendered="renderProject"
+                @unselect-project="unselectProject"
+            ></project-info>
         </div>
         <div class="fullscreen fixed vignette"></div>
     </div>
@@ -35,13 +49,17 @@
     import ProjectList from './components/project-list.vue'
     import AboutSite from './components/about-site.vue'
     import AboutAuthor from './components/about-author.vue'
+    import SocialLinks from './components/social-links.vue'
+    import ProjectInfo from './components/project-info.vue'
 
     export default {
         components: {
             ArticleList,
             ProjectList,
             AboutSite,
-            AboutAuthor
+            AboutAuthor,
+            SocialLinks,
+            ProjectInfo
         },
         data() {
             return {
@@ -51,12 +69,29 @@
                     "Projects",
                     "This site",
                     "The author"
-                ]
+                ],
+                selectedProject: {},
+                renderMainMenu: false,
+                renderProject: false
             }
+        },
+        mounted() {
+            //delaying painting the main menu, for animation purposes
+            setTimeout(()=> this.renderMainMenu = true, 800) 
         },
         methods: {
             showInfo(info) {
-                this.showingInfo = info
+                if(this.renderMainMenu) this.showingInfo = info
+            },
+            selectProject(project) {
+                this.renderMainMenu = false
+                this.selectedProject = project
+                this.renderProject = true
+            },
+            unselectProject() {
+                //delaying painting the main menu, for animation purposes
+                setTimeout(()=> this.renderMainMenu = true, 50) 
+                this.renderProject = false
             }
         }
     }
@@ -67,45 +102,29 @@
         width: 500px;
         height:500px;
     }
-    h1 {
-        font-family: 'Quicksand', sans-serif;
-        text-align: center;
-        font-size: 70px;
-        margin:5px;
-    }
-    h2 {
-        font-family: 'Quicksand', sans-serif;
-        text-align: center;
-        font-size:29px;
-        margin:0;
-    }
-    h1,h2 { line-height: 1 }
     .separator {
         width:50px;
         margin: auto;
         margin-top:2em;
         border-top:1px solid #444444;
     }
-    nav {
+    .content-container { height:80% }
+    .main-menu {
         padding-left:2em;
-        height:80%;
         margin-top:10%;
     }
-    nav > a {
+    .main-menu > a {
         font-family: 'Droid Sans Mono', monospace;
         display: block;
         text-align: left;
-        text-decoration: none;
-        color: black;
         font-size:17px;
         padding: 0.5em 1em;
         margin: 1em auto;
         position: relative;
         color: #ddd;
-        cursor:pointer;
     }
-    nav > a:hover, nav > a.active { color: black } 
-    nav > a.active:after {
+    .main-menu > a:hover, .main-menu > a.active { color: black } 
+    .main-menu > a.active:after {
         position:absolute;
         right:0px;
         top:0.85em;
@@ -114,34 +133,46 @@
         border-bottom: 4px solid transparent; 
         border-right: 4px solid black; 
     }
-    main { 
+    .info-container { 
         margin-top:5%;
         margin-bottom:auto;    
+        opacity:0;
     }
-    main>div {
-        border-left: 1px solid black;
+    .info-container>div {
         padding-left: 1.5em;
         height:100%;
         line-height:1.4;
         font-size:15px;
     }
+    .border-left { border-left: 1px solid black }
     .fullscreen.vignette { z-index: -1 }
 
     /*  //// ANIMATIONS //// */
 
     .fullscreen.vignette { animation: fadeIn 1.5s }
-    .main-title { 
+    .main-logo { 
         opacity: 0;
         animation: fadeIn 1.5s 0.5s forwards;
     }
-    nav > a {
+    .main-menu > a {
         transition: color 0.4s;
         opacity: 0;
         animation: fadeIn 0.4s forwards;
     }
-    nav > a:nth-child(1) { animation-delay: 0.8s }
-    nav > a:nth-child(2) { animation-delay: 0.9s }
-    nav > a:nth-child(3) { animation-delay: 1.0s }
-    nav > a:nth-child(4) { animation-delay: 1.1s }
-    main>div { animation: fadeInDown 0.5s }
+    .main-menu > a:nth-child(1) { animation-delay: 0s }
+    .main-menu > a:nth-child(2) { animation-delay: 0.1s }
+    .main-menu > a:nth-child(3) { animation-delay: 0.2s }
+    .main-menu > a:nth-child(4) { animation-delay: 0.3s }
+    .info-container { animation: fadeIn 0.7s 0.4s forwards }
+    .info-container>div { animation: fadeInDown 0.5s }
+
+    /* /// TRANSITIONS /// */
+
+    .hide-left-leave-active {
+        transition: opacity .3s, transform .3s;
+    }
+    .hide-left-leave-active {
+        opacity: 0;
+        transform: translateX(-50%);
+    }
 </style>
