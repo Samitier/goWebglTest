@@ -27,7 +27,7 @@
 
 <style scoped>
     nav {
-        padding-left: 1em;
+        padding-left: 1.5em;
         padding-top: 6.3em
     }
     a {
