@@ -6,28 +6,39 @@
                 <h2>A creative programming blog</h2>
                 <div class="separator"></div>
             </header>
-            <nav class="col-5">
-                <a v-for="(item, i) in menuItems" @mouseover="showInfo(i)" :class="{ active: showingInfo == i }" class="btn"> 
-                    > {{ item }} 
-                </a>
-            </nav>
-            <main class="col-7">
-                <div v-if="showingInfo==-1">
-                    <social-links></social-links>
+            <transition name="hide-left">
+                <div class="col-12 content-container container" v-show="renderMainMenu">
+                    <nav class="col-5">
+                        <a  v-for="(item, i) in menuItems" 
+                            @mouseover="showInfo(i)" :class="{ active: showingInfo == i }" class="btn"> 
+                            > {{ item }} 
+                        </a>
+                    </nav>
+                    <div class="info-container col-7">
+                        <div v-if="showingInfo==-1">
+                            <social-links></social-links>
+                        </div>
+                        <div class="border-left" v-if="showingInfo==0">
+                            <article-list></article-list>
+                        </div>
+                        <div class="border-left" v-if="showingInfo==1">
+                            <project-list @select-project="selectProject"></project-list>
+                        </div>
+                        <div class="border-left" v-if="showingInfo==2">
+                            <about-site></about-site>
+                        </div>
+                        <div class="border-left" v-if="showingInfo==3">
+                            <about-author></about-author>
+                        </div>
+                    </div>  
                 </div>
-                <div class="border-left" v-if="showingInfo==0">
-                    <article-list></article-list>
-                </div>
-                <div class="border-left" v-if="showingInfo==1">
-                    <project-list></project-list>
-                </div>
-                <div class="border-left" v-if="showingInfo==2">
-                    <about-site></about-site>
-                </div>
-                <div class="border-left" v-if="showingInfo==3">
-                    <about-author></about-author>
-                </div>
-            </main>   
+            </transition>
+
+            <project-info 
+                :project="selectedProject" 
+                :is-rendered="renderProject"
+                @unselect-project="unselectProject"
+            ></project-info>
         </div>
         <div class="fullscreen fixed vignette"></div>
     </div>
@@ -39,6 +50,7 @@
     import AboutSite from './components/about-site.vue'
     import AboutAuthor from './components/about-author.vue'
     import SocialLinks from './components/social-links.vue'
+    import ProjectInfo from './components/project-info.vue'
 
     export default {
         components: {
@@ -46,7 +58,8 @@
             ProjectList,
             AboutSite,
             AboutAuthor,
-            SocialLinks
+            SocialLinks,
+            ProjectInfo
         },
         data() {
             return {
@@ -56,12 +69,29 @@
                     "Projects",
                     "This site",
                     "The author"
-                ]
+                ],
+                selectedProject: {},
+                renderMainMenu: false,
+                renderProject: false
             }
+        },
+        mounted() {
+            //delaying painting the main menu, for animation purposes
+            setTimeout(()=> this.renderMainMenu = true, 800) 
         },
         methods: {
             showInfo(info) {
-                this.showingInfo = info
+                if(this.renderMainMenu) this.showingInfo = info
+            },
+            selectProject(project) {
+                this.renderMainMenu = false
+                this.selectedProject = project
+                this.renderProject = true
+            },
+            unselectProject() {
+                //delaying painting the main menu, for animation purposes
+                setTimeout(()=> this.renderMainMenu = true, 50) 
+                this.renderProject = false
             }
         }
     }
@@ -78,9 +108,9 @@
         margin-top:2em;
         border-top:1px solid #444444;
     }
+    .content-container { height:80% }
     nav {
         padding-left:2em;
-        height:80%;
         margin-top:10%;
     }
     nav > a {
@@ -103,12 +133,12 @@
         border-bottom: 4px solid transparent; 
         border-right: 4px solid black; 
     }
-    main { 
+    .info-container { 
         margin-top:5%;
         margin-bottom:auto;    
         opacity:0;
     }
-    main>div {
+    .info-container>div {
         padding-left: 1.5em;
         height:100%;
         line-height:1.4;
@@ -129,10 +159,20 @@
         opacity: 0;
         animation: fadeIn 0.4s forwards;
     }
-    nav > a:nth-child(1) { animation-delay: 0.8s }
-    nav > a:nth-child(2) { animation-delay: 0.9s }
-    nav > a:nth-child(3) { animation-delay: 1.0s }
-    nav > a:nth-child(4) { animation-delay: 1.1s }
-    main { animation: fadeIn 0.8s 1.2s forwards }
-    main>div { animation: fadeInDown 0.5s }
+    nav > a:nth-child(1) { animation-delay: 0s }
+    nav > a:nth-child(2) { animation-delay: 0.1s }
+    nav > a:nth-child(3) { animation-delay: 0.2s }
+    nav > a:nth-child(4) { animation-delay: 0.3s }
+    .info-container { animation: fadeIn 0.7s 0.4s forwards }
+    .info-container>div { animation: fadeInDown 0.5s }
+
+    /* /// TRANSITIONS /// */
+
+    .hide-left-leave-active {
+        transition: opacity .3s, transform .3s;
+    }
+    .hide-left-leave-active {
+        opacity: 0;
+        transform: translateX(-50%);
+    }
 </style>

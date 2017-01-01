@@ -2,7 +2,7 @@
     <div>
         <h3 class="section-heading">Finished projects</h3>
         <div class="container projects-container">
-            <a class="btn project-link col-3" v-for="project in projects" :href="project.link">
+            <a class="btn project-link col-3" v-for="project in projects" @click="selectProject(project)">
                 <i class="category-icon">{{ project.icon }}</i>
                 <span>{{ project.title }}</span>
             </a>           
@@ -14,16 +14,28 @@
     export default {
         components: {
         },
+        props: ['selectedProject'],
         data() {
             return {
                 projects: [
-                    { icon: "", title: "Shaders", link: '/shaders' },
+                    { 
+                        icon: "", 
+                        title: "Shaders", 
+                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",  
+                        repository: "github.com",
+                        link: '/shaders' 
+                    },
                     { icon: "", title: "Isometric Map", link: '/isometric-map' },
                     { icon: "", title: "Models", link: "/about" },
                     { icon: "", title: "Shaders", link: '/shaders' },
                     { icon: "", title: "Isometric Map", link: '/isometric-map' },
                     { icon: "", title: "Models", link: "/about" }
                 ]
+            }
+        },
+        methods: {
+            selectProject(project) {
+                this.$emit('select-project', project)
             }
         }
     }
