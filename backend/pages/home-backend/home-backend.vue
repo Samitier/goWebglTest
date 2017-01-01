@@ -1,5 +1,6 @@
 <template>
     <main class="container">
+        <a class="btn logout" @click="logout()">(Logout)</a>
         <div class="main-logo col-12">
             <h1>WebGL Rocks!</h1>
             <h2>[The backend]</h2>
@@ -43,7 +44,9 @@
             api.getProjects().then( projects => this.projects = projects )
         },
         methods: {
-
+            logout() {
+                api.logout().then( () => this.$router.push({ name: 'login' }))
+            }
         }
     }
 </script>
@@ -53,7 +56,13 @@
         width: 800px;
         margin: auto;
     }
-    body { background-color: rgb(211, 245, 255) }
+    .logout {
+        color: #BBB;
+        position: absolute;
+        right: 2em;
+        top: 1em;
+    }
+    .logout:hover { opacity: 0.5 }
     .main-logo { padding: 5em }
     .content {
         padding:2em;

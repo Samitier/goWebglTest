@@ -10,12 +10,17 @@
         },
         login(password) {
             return this.http.post('login', { password }).then( response => {
-                cookies.set("api_token", response.data.token, true)
+                cookies.set(TOKEN_COOKIE_NAME, response.data.token, true)
+                this.http.headers.common['wgl-access-token'] = response.data.token
                 return response.data
             })
         },
+        logout() {
+            this.http.headers.common['wgl-access-token'] = ""
+            return Promise.resolve(cookies.delete(TOKEN_COOKIE_NAME))
+        },
         getApiToken() {
-            return cookies.get('api_token')
+            return cookies.get(TOKEN_COOKIE_NAME)
         },
         getProjects () {
             return this.http.get('projects').then( response => response.data )

@@ -21,7 +21,7 @@
             return null;
         },
         delete(name) {
-            createCookie(name,"", false)
+            this.set(name,"", false)
         }
     }
 </script>
