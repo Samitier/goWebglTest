@@ -1,5 +1,5 @@
 <template>
-    <nav>
+    <nav class="social-links-container">
         <a href="https://github.com/Samitier/webgl.rocks" title="Github" class="btn">
             <i class="icon-github-circled"></i>
         </a>
@@ -26,9 +26,9 @@
 </script>
 
 <style scoped>
-    nav {
+    .social-links-container {
         padding-left: 1.5em;
-        padding-top: 6.3em
+        padding-top: 8em
     }
     a {
         color: #ddd;

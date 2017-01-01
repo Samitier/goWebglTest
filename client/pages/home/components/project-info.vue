@@ -42,7 +42,7 @@
         font-size: 14px;
     }
     .go-back {
-        margin-top: 1.5em;
+        margin: 1.5em 0;
         display: block;
         font-size: 14px;
         opacity: 0.8;

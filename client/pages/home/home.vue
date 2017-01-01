@@ -1,5 +1,5 @@
 <template>
-    <div class="container h-center v-center fullscreen">
+    <div class="container h-center v-center fullscreen site-container">
         <div class="container main-ui-container">
             <header class="main-logo col-12" @mouseover="showInfo(-1)">
                 <h1>WebGL Rocks!</h1>
@@ -8,7 +8,7 @@
             </header>
             <transition name="hide-left">
                 <div class="col-12 content-container container" v-show="renderMainMenu">
-                    <nav class="col-5">
+                    <nav class="main-menu col-5">
                         <a  v-for="(item, i) in menuItems" 
                             @mouseover="showInfo(i)" :class="{ active: showingInfo == i }" class="btn"> 
                             > {{ item }} 
@@ -109,11 +109,11 @@
         border-top:1px solid #444444;
     }
     .content-container { height:80% }
-    nav {
+    .main-menu {
         padding-left:2em;
         margin-top:10%;
     }
-    nav > a {
+    .main-menu > a {
         font-family: 'Droid Sans Mono', monospace;
         display: block;
         text-align: left;
@@ -123,8 +123,8 @@
         position: relative;
         color: #ddd;
     }
-    nav > a:hover, nav > a.active { color: black } 
-    nav > a.active:after {
+    .main-menu > a:hover, .main-menu > a.active { color: black } 
+    .main-menu > a.active:after {
         position:absolute;
         right:0px;
         top:0.85em;
@@ -154,15 +154,15 @@
         opacity: 0;
         animation: fadeIn 1.5s 0.5s forwards;
     }
-    nav > a {
+    .main-menu > a {
         transition: color 0.4s;
         opacity: 0;
         animation: fadeIn 0.4s forwards;
     }
-    nav > a:nth-child(1) { animation-delay: 0s }
-    nav > a:nth-child(2) { animation-delay: 0.1s }
-    nav > a:nth-child(3) { animation-delay: 0.2s }
-    nav > a:nth-child(4) { animation-delay: 0.3s }
+    .main-menu > a:nth-child(1) { animation-delay: 0s }
+    .main-menu > a:nth-child(2) { animation-delay: 0.1s }
+    .main-menu > a:nth-child(3) { animation-delay: 0.2s }
+    .main-menu > a:nth-child(4) { animation-delay: 0.3s }
     .info-container { animation: fadeIn 0.7s 0.4s forwards }
     .info-container>div { animation: fadeInDown 0.5s }
 
