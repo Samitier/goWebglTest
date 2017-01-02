@@ -58,7 +58,13 @@
         font-size: 13px;
         margin: 1em;
         padding: 0.4em 1em 0.2em 1em;
+        transition: color 0.4s, background-color 0.4s;
     }
+    .project-links-container > a:hover {
+        background-color: #555;
+        color: white;
+    }
+
     /* /// TRANSITIONS /// */
 
     .appear-from-below-enter-active {
