@@ -18,8 +18,6 @@
     export default {
         components: {},
         props: ['project', 'isRendered'],
-        data() {
-        },
         methods: {
             unselectProject() {
                 this.$emit('unselect-project')
@@ -39,10 +37,10 @@
     p {
         color: #555;
         line-height: 1.4;
-        font-size: 14px;
+        font-size: 13px;
     }
     .go-back {
-        margin: 1.5em 0;
+        margin: 1em 0;
         display: block;
         font-size: 14px;
         opacity: 0.8;

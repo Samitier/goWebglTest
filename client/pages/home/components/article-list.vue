@@ -6,6 +6,7 @@
                 <i class="category-icon col-3">{{ article.icon }}</i>
                 <div class="col-9 article-info">
                     <h4>{{ article.title }}</h4>
+                    <time>{{ article.date | ddmmyydate }}</time>
                     <span>{{ article.excerpt }}</span>
                 </div>
             </a>
@@ -14,24 +15,28 @@
 </template>
 
 <script>
+    import ddmmyydate from '../../../filters/ddmmyydate.vue'
+
     export default {
         components: {
         },
         data() {
             return {
                 articles: [
-                    { icon: "", title: "Shaders", excerpt: "Lorem ipsum dolor sit amet", link: '/shaders' },
+                    { icon: "", title: "Shaders", excerpt: "Lorem ipsum dolor sit amet", link: '/shaders', date: Date.now() },
                     { icon: "", title: "Isometric Map", excerpt: "Lorem ipsum dolor sit amet", link: '/isometric-map' },
                     { icon: "", title: "Models", excerpt: "Lorem ipsum dolor sit amet", link: "/about" }
                 ]
             }
-        }
+        },
+        filters: ddmmyydate
     }
 </script>
 
 <style scoped>
     .articles-container { margin-top: 20px }
     .article-link {
+        position: relative;
         color: black;
         margin-bottom: 1em;
         cursor: pointer;
@@ -42,6 +47,13 @@
     }
     .article-info {
         margin:auto;
+    }
+    time {
+        position: absolute;
+        top:3px;
+        right:0;
+        font-size:12px;
+        color: #999;
     }
     h4 {
         font-size: 16px;
