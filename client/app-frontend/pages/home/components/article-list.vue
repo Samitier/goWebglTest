@@ -2,14 +2,14 @@
     <div>
         <h3 class="section-heading">Latest articles</h3>
         <div class="container articles-container">
-            <a v-for="article in articles" class="article-link col-12 container">
+            <router-link :to="'/a/'+article.slug" v-for="article in articles" class="btn article-link col-12 container">
                 <i class="category-icon col-3">{{ article.icon }}</i>
                 <div class="col-9 article-info">
                     <h4>{{ article.title }}</h4>
                     <time>{{ article.date | ddmmyydate }}</time>
                     <span>{{ article.excerpt }}</span>
                 </div>
-            </a>
+            </router-link>
         </div>
     </div>
 </template>
@@ -23,7 +23,7 @@
         data() {
             return {
                 articles: [
-                    { icon: "", title: "Shaders", excerpt: "Lorem ipsum dolor sit amet", link: '/shaders', date: Date.now() },
+                    { icon: "", slug:"something", title: "Shaders", excerpt: "Lorem ipsum dolor sit amet", link: '/shaders', date: Date.now() },
                     { icon: "", title: "Isometric Map", excerpt: "Lorem ipsum dolor sit amet", link: '/isometric-map' },
                     { icon: "", title: "Models", excerpt: "Lorem ipsum dolor sit amet", link: "/about" }
                 ]

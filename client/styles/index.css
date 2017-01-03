@@ -28,7 +28,11 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     flex-wrap: wrap;
 }
-
+.container-responsive {
+    max-width: 800px;
+    margin: auto;
+    align-self: flex-start; 
+}
 .h-center { justify-content: center }
 .v-center { align-items: center }
 .col-1 { width: 8.333% }
@@ -73,6 +77,23 @@ h1, h2, h3, h4, h5, h6 {
     margin:0;
 }
 .main-logo h1, .main-logo h2 { line-height: 1 }
+.main-logo .separator {
+    width:50px;
+    margin: auto;
+    margin-top:2em;
+    border-top:1px solid #444444;
+}
+
+.main-logo-sm h1{
+    font-size: 30px;
+    margin-top: 10px;
+}
+.main-logo-sm h2 {
+    font-size: 15px;
+}
+.main-logo-sm .separator {
+    margin-top: .9em;
+}
 
 /* /////////// SPECIFIC CLASSES //////////// */
 
@@ -258,6 +279,21 @@ input[type=range].input-slider:focus::-ms-fill-upper {
     .social-links-container > a {
         margin: 0 .2em;
     }
+    .container-responsive {
+        width:100%;
+    }
+    .main-logo h1{
+        font-size: 47px;
+    }
+    .main-logo h2 {
+        font-size: 23px;
+    }
+    .main-logo-sm h1{
+        font-size: 30px;
+    }
+    .main-logo-sm h2 {
+        font-size: 15px;
+    }
 }
 
 /* Small devices (landscape phones, 544px and up) */
@@ -271,5 +307,17 @@ input[type=range].input-slider:focus::-ms-fill-upper {
     }
     .social-links-container {
         padding-left: 0.9em;
+    }
+    .main-logo h1{
+        font-size: 44px;
+    }
+    .main-logo h2 {
+        font-size: 22px;
+    }
+    .main-logo-sm h1{
+        font-size: 30px;
+    }
+    .main-logo-sm h2 {
+        font-size: 15px;
     }
 }

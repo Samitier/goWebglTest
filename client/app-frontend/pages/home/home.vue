@@ -33,7 +33,6 @@
                     </div>  
                 </div>
             </transition>
-
             <project-info 
                 :project="selectedProject" 
                 :is-rendered="renderProject"
@@ -45,12 +44,12 @@
 </template>
 
 <script>
-    import ArticleList from './components/article-list.vue'
-    import ProjectList from './components/project-list.vue'
-    import AboutSite from './components/about-site.vue'
-    import AboutAuthor from './components/about-author.vue'
-    import SocialLinks from './components/social-links.vue'
-    import ProjectInfo from './components/project-info.vue'
+    import ArticleList from './components/article-list'
+    import ProjectList from './components/project-list'
+    import AboutSite from './components/about-site'
+    import AboutAuthor from './components/about-author'
+    import SocialLinks from './components/social-links'
+    import ProjectInfo from './components/project-info'
 
     export default {
         components: {
@@ -101,12 +100,6 @@
     .main-ui-container {
         width: 500px;
         height:500px;
-    }
-    .separator {
-        width:50px;
-        margin: auto;
-        margin-top:2em;
-        border-top:1px solid #444444;
     }
     .content-container { height:80% }
     .main-menu {
