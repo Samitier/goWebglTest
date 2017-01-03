@@ -59,7 +59,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* //////////// MAIN LOGO ///////////// */
-
+.main-logo { cursor: pointer }
 .main-logo h1 {
     font-family: 'Quicksand', sans-serif;
     text-align: center;
@@ -97,6 +97,19 @@ h1, h2, h3, h4, h5, h6 {
 /* //////////// BACKEND-SPECIFIC CLASSES /////////// */
 
 .backend { background-color: #e9f3fe }
+
+/* /////////// UTILITIES ////////// */
+
+.fullscreen {
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+}
+.fixed { position: fixed }
+.text-center { text-align:center }
+.inline-block { display: inline-block }
 
 /* /////////// CUSTOM INPUT - TEXT //////////// */
 
@@ -199,20 +212,6 @@ input[type=range].input-slider:focus::-ms-fill-lower {
 input[type=range].input-slider:focus::-ms-fill-upper {
   background: #9ea8b2;
 }
-
-/* /////////// UTILITIES ////////// */
-
-.fullscreen {
-    position:absolute;
-    top:0;
-    bottom:0;
-    left:0;
-    right:0;
-}
-.fixed { position: fixed }
-.text-center { text-align:center }
-.inline-block { display: inline-block }
-
 
 /* /////////////////////// ANIMATIONS ///////////////////////////// */
 
