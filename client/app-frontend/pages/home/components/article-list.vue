@@ -6,8 +6,8 @@
                 <i class="category-icon col-3">{{ article.icon }}</i>
                 <div class="col-9 article-info">
                     <h4>{{ article.title }}</h4>
-                    <time>{{ article.date | ddmmyydate }}</time>
-                    <span>{{ article.excerpt }}</span>
+                    <time>{{ article.createdAt | ddmmyydate }}</time>
+                    <span>{{ article.summary }}</span>
                 </div>
             </router-link>
         </div>
@@ -16,18 +16,18 @@
 
 <script>
     import ddmmyydate from 'filters/ddmmyydate'
+    import api from 'services/api'
 
     export default {
         components: {
         },
         data() {
             return {
-                articles: [
-                    { icon: "", slug:"something", title: "Shaders", excerpt: "Lorem ipsum dolor sit amet", link: '/shaders', date: Date.now() },
-                    { icon: "", title: "Isometric Map", excerpt: "Lorem ipsum dolor sit amet", link: '/isometric-map' },
-                    { icon: "", title: "Models", excerpt: "Lorem ipsum dolor sit amet", link: "/about" }
-                ]
+                articles: []
             }
+        },
+        created() {
+            api.getArticles().then( articles => this.articles = articles )
         },
         filters: ddmmyydate
     }

@@ -15,19 +15,19 @@
                         </a>
                     </nav>
                     <div class="info-container col-7">
-                        <div v-if="showingInfo==-1">
+                        <div v-show="showingInfo==-1">
                             <social-links></social-links>
                         </div>
-                        <div class="border-left" v-if="showingInfo==0">
+                        <div class="border-left" v-show="showingInfo==0">
                             <article-list></article-list>
                         </div>
-                        <div class="border-left" v-if="showingInfo==1">
+                        <div class="border-left" v-show="showingInfo==1">
                             <project-list @select-project="selectProject"></project-list>
                         </div>
-                        <div class="border-left" v-if="showingInfo==2">
+                        <div class="border-left" v-show="showingInfo==2">
                             <about-site></about-site>
                         </div>
-                        <div class="border-left" v-if="showingInfo==3">
+                        <div class="border-left" v-show="showingInfo==3">
                             <about-author></about-author>
                         </div>
                     </div>  

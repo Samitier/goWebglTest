@@ -11,27 +11,19 @@
 </template>
 
 <script>
+    import api from 'services/api'
+
     export default {
         components: {
         },
         props: ['selectedProject'],
         data() {
             return {
-                projects: [
-                    { 
-                        icon: "", 
-                        title: "Shaders", 
-                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",  
-                        repository: "github.com",
-                        link: '/shaders' 
-                    },
-                    { icon: "", title: "Isometric Map", link: '/isometric-map' },
-                    { icon: "", title: "Models", link: "/about" },
-                    { icon: "", title: "Shaders", link: '/shaders' },
-                    { icon: "", title: "Isometric Map", link: '/isometric-map' },
-                    { icon: "", title: "Models", link: "/about" }
-                ]
+                projects: []
             }
+        },
+        created() {
+            api.getProjects().then( projects => this.projects = projects )
         },
         methods: {
             selectProject(project) {

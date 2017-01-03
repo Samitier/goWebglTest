@@ -1,10 +1,15 @@
 import 'styles/index.css'
 import Vue from 'vue'
-import routes from './routes'
+import VueResource from 'vue-resource'
 import VueRouter from 'vue-router'
-import app from './app.vue'
+
+import routes from './routes'
+import app from './app'
+import apiService from 'services/api'
 
 Vue.use(VueRouter)
+Vue.use(VueResource)
+apiService.init(Vue)
 
 const router = new VueRouter({ 
     mode: 'history',
