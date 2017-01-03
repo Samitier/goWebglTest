@@ -1,5 +1,5 @@
 import {  } from "three"
-import { ThreeScene } from "../../webgl-utils/three-scene.js"
+import { ThreeScene } from "webgl-utils/three-scene"
  
 const MAX_PARTICLES = 2500000
 

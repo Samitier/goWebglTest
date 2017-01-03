@@ -1,6 +1,6 @@
-import HomeBackend from './pages/home-backend/home-backend.vue'
-import Login from './pages/login/login.vue'
-import NotFound from './pages/errors/404.vue'
+import HomeBackend from './pages/home-backend/home-backend'
+import Login from './pages/login/login'
+import NotFound from './pages/errors/404'
 
 let routes = [
     { path: '/', component: HomeBackend, name: 'home' },

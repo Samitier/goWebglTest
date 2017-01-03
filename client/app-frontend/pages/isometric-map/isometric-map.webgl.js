@@ -1,5 +1,5 @@
 import { OrthographicCamera, DirectionalLight, BoxGeometry, MeshLambertMaterial, Mesh, Raycaster, Color } from "three"
-import { ThreeScene } from "../../webgl-utils/three-scene.js"
+import { ThreeScene } from "webgl-utils/three-scene"
  
 const   CUBE_SIZE = 24,
         CAMERA_X = 200,

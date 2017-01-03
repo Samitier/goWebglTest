@@ -1,4 +1,4 @@
-require('./styles/index.css')
+import 'styles/index.css'
 import Vue from 'vue'
 import routes from './routes'
 import VueRouter from 'vue-router'

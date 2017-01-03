@@ -15,7 +15,7 @@
 </template>
 
 <script>
-    import ddmmyydate from '../../../filters/ddmmyydate.vue'
+    import ddmmyydate from 'filters/ddmmyydate'
 
     export default {
         components: {
