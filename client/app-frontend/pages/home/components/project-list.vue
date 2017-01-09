@@ -40,7 +40,9 @@
         font-size:11px;
         margin: 7px 0px 10px 0px;
         line-height: 1;
+        text-align:center;
     }
+    .category-icon { margin:auto }
     .category-icon, .project-link span { transition: transform 0.3s }
     .project-link:hover span { transform: translateY(2px) }
     .project-link:hover .category-icon {

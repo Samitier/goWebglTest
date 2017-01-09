@@ -5,9 +5,10 @@
             <h3>{{ project.title }}</h3>
             <p>{{ project.description }}</p>
             <div class="project-links-container">
-                <a :href="project.repository" class="btn">Code</a>
+                <a :href="project.repositoryLink" class="btn">Code</a>
                 <router-link :to="'/search?category=' + project.slug" class="btn">Articles</router-link>
-                <router-link :to="project.href||''" class="btn">Result</router-link>
+                <a v-if="project.resultLink" :href="project.resultLink" class="btn">Result</a>
+                <router-link v-if="!project.resultLink" :to="'/' + project.slug" class="btn">Result</router-link>
             </div>
             <a class="btn go-back" @click="unselectProject()"> &larr; go back </a>
         </div> 

@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress",
+    "build":  "webpack -p --config ./webpack.config.js --progress",
     "start": "node ./server/main.js",
     "dev": "webpack --watch --progress --colors",
     "dev-server": "webpack-dev-server --inline --hot --history-api-fallback --no-info --open --colors"
