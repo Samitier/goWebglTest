@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             autoIncrement: true 
         },
-        code:           {
+        slug:           {
             type:       DataTypes.STRING,
             allowNull:  false,
             unique:     true,
@@ -16,9 +16,12 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
         description:    {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
         },
-        link:  {
+        repositoryLink:  {
+            type: DataTypes.STRING
+        },
+        resultLink:  {
             type: DataTypes.STRING
         }
     })

@@ -7,8 +7,8 @@ let release = process.argv.indexOf('--release') !== -1
 
 module.exports = {
     entry: {
-        app: './client/main.js',
-        backend: "./backend/main.js"
+        app: './client/app-frontend/main.js',
+        backend: "./client/app-backend/main.js"
     },
     output: {
         path: path.resolve(__dirname, './public'),
@@ -16,17 +16,21 @@ module.exports = {
         filename: 'assets/[name].bundle.js'
     },
     resolveLoader: {
-        root: path.join(__dirname, 'node_modules'),
+        root: path.join(__dirname, 'node_modules')
+    },
+    resolve: {
+        root: [ path.resolve('./client') ],
+        extensions: ['', '.js', '.vue']
     },
     plugins: [
         new HtmlWebpackPlugin({ 
-            template: './client/index.html', 
+            template: './client/app-frontend/index.html', 
             hash: true, 
             chunks: ['app'],
             filename: 'index.html' 
         }),
         new HtmlWebpackPlugin({ 
-            template: './backend/index.html', 
+            template: './client/app-backend/index.html', 
             hash: true, 
             chunks: ['backend'],
             filename: 'backend.html' 
