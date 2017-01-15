@@ -14,6 +14,8 @@ let express      = require('express'),
 let app          = express(),
     port         = parseInt(process.env.PORT, 10) || 3000
 
+const ONE_YEAR_IN_MS = 31536000000
+
 //// APP SETUP ////
 
 app.use(compress())
@@ -22,7 +24,7 @@ app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(cookieParser())
-app.use(express.static(path.join(__dirname, '../public'), { maxAge: 31536000 }))
+app.use(express.static(path.join(__dirname, '../public'), { maxAge: ONE_YEAR_IN_MS }))
 app.set('port', port)
 
 //// ROUTE HANDLERS ////
