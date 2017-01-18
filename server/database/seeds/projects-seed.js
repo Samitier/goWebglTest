@@ -53,6 +53,24 @@ module.exports = db => {
                 if (created) console.log("[seed] -> Project [" + obj.dataValues.title + "] seeded")
                 resolve()
             })
+        }),
+        new Promise((resolve, reject) => {
+             db.project.findOrCreate({
+                where:    { slug: 'shader-sketchbook' },
+                defaults: {
+                    title: "Shader Sketchbook",
+                    description: 
+                        `I like to experiment on shaders. I am very far from being an expert, but I like to create visually 
+                        appealing shaders and shader combinations. I like being able to control how something is
+                        rendered, and take advantage of it to set my imagination free. Here, only my imagination 
+                        (and my limited knowledge of maths) is the limit!`,
+                    repositoryLink: "https://github.com/Samitier/webgl-rocks/tree/master/client/pages/isometric-map",
+                    resultLink: ""
+                }
+            }).spread((obj, created) => {
+                if (created) console.log("[seed] -> Project [" + obj.dataValues.title + "] seeded")
+                resolve()
+            })
         })
     ])
     .then( values => console.log("[seed] -> Projects seeded successfully") )

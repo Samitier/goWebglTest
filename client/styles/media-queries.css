@@ -13,10 +13,8 @@
     .vignette:after {  
         box-shadow: inset 0 0 2em 3px #666;
     }
-    body {
-        overflow-y: auto;
-    }
     .site-container {
+        overflow-y:auto;
         align-items: flex-start;
         padding-top:1em;
     }

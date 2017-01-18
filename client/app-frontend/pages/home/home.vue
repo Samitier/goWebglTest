@@ -97,6 +97,7 @@
 </script>
 
 <style scoped>
+    .site-container { overflow-y: hidden;}
     .main-ui-container {
         width: 500px;
         height:500px;

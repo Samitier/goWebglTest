@@ -3,9 +3,30 @@
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Scope One', serif;
     font-weight: 400;
+    margin: 0px;
 }
 
 body { font-family: 'Hind', sans-serif }
+
+h1 {
+    font-size:40px;
+}
+h2 {
+    font-size:32px;
+}
+h3 {
+    font-size:25px;
+}
+h4 {
+    font-size:20px;
+}
+h5 {
+    font-size:16px;
+}
+
+p {
+    color: #333;
+}
 
 /* //////////// MAIN LOGO ///////////// */
 
@@ -47,4 +68,17 @@ body { font-family: 'Hind', sans-serif }
     font-size:30px;
     margin:0;
     margin-bottom: -10px;
+}
+
+/* ////////// CODE /////////////// */
+
+code {
+    background: #2c4c5e;
+    color: #DDD;
+    display: block;
+    font-family: "Droid Sans Mono";
+    font-size: 13px;
+    padding: 0em 1.5em;
+    line-height: 1.5;
+    white-space:pre;
 }

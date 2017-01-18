@@ -1,6 +1,7 @@
 body {
     margin:0px;
-    overflow:hidden;
+    overflow-x: hidden;
+    background-color: #e8faff;
 }
 
 /* ////////////// BOX SIZING FIX //////////////// */

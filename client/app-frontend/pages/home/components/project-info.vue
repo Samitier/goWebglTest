@@ -30,13 +30,12 @@
 <style scoped>
     .category-icon {
         transform: scale(1.5);
-        margin: 2.5em auto 0 auto;
+        margin: 2.5em auto 1.5em auto;
     }
     h3 {
         font-weight: bold;
     }
     p {
-        color: #555;
         line-height: 1.4;
         font-size: 13px;
     }
