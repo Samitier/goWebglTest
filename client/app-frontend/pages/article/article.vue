@@ -11,8 +11,8 @@
 
             </header>
             <body class="article-body">
-            <h1>Heading One<small>Subtitle one</small></h1>
-            <h2>Heading Two<small>Subtitle two</small></h2>
+            <h1>Heading One</h1>
+            <h2>Heading Two</h2>
             <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
             labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco 
