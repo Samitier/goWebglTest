@@ -1,7 +1,7 @@
 body {
     margin:0px;
     overflow-x: hidden;
-    background-color: #e8faff;
+    background-color: #f3fcff;
 }
 
 /* ////////////// BOX SIZING FIX //////////////// */
@@ -32,4 +32,40 @@ html {
     height: 42px;
     padding:10px; 
     border: 2px solid black;
+}
+
+/* ///// CUSTOM SCROLLBAR ///// */
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #b3b3b3;
+  border: 0px none #ffffff;
+  border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ccc;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #b3b3b3;
+}
+::-webkit-scrollbar-track {
+  background: #e7e7e7;
+  border: 0px none #ffffff;
+  border-radius: 0px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #e7e7e7;
+}
+::-webkit-scrollbar-track:active {
+  background: #e7e7e7;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
 }

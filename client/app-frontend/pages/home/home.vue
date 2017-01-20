@@ -115,7 +115,7 @@
         padding: 0.5em 1em;
         margin: 1em auto;
         position: relative;
-        color: #ddd;
+        color: #ccc;
     }
     .main-menu > a:hover, .main-menu > a.active { color: black } 
     .main-menu > a.active:after {

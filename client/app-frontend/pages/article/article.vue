@@ -1,13 +1,16 @@
 <template>
     <div class="container h-center container-responsive">
-        <header class="main-logo main-logo-sm col-12">
+        <nav class="main-logo-topbar col-12">
             <router-link to="/" class="btn">
-                <h1>WebGL Rocks!</h1>
-                <h2>A creative programming blog</h2>
+                <h1>WebGL Rocks! <small>A creative programming blog</small></h1>
                 <div class="separator"></div>
             </router-link>
-        </header>
+        </nav>
         <article class="col-12">
+            <header class="article-heading">
+
+            </header>
+            <body class="article-body">
             <h1>Heading One<small>Subtitle one</small></h1>
             <h2>Heading Two<small>Subtitle two</small></h2>
             <p>
@@ -22,8 +25,14 @@
             labore et dolore magna aliqua.</i> <u>Ut enim ad minim veniam, quis nostrud exercitation ullamco 
             laboris nisi ut aliquip ex ea commodo consequat.</u> <b>Duis aute irure dolor in reprehenderit 
             in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</b> 
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            Excepteur sint occaecat cupidatat non proident, <code>let someInlineCode = 0</code> sunt in culpa qui officia deserunt mollit anim id est laborum.
             </p>
+            <blockquote>
+                <p>
+                    Now, you've settled on the opposite side of the paper to me. I can see your traces that soak through the fiber, the pulp vegetation. 
+                    And when we bocame waterlogged and the cage desintegrates we will intermingle. And when this paper aeroplane leaves the cliff edge, we will come together.
+                </p>
+            </blockquote>
             <h3>Heading three</h3>
             <ul>
                 <li>List item one </li>
@@ -33,11 +42,12 @@
             <p>A text with <a href="#"> a link.</a></p>
             <h4>Heading four</h4>
             <p>Some code</p>
-            <code>
+            <pre><code>
 for(let i of something) {
     console.log("something" + i)
 }
-            </code>
+            </code></pre>
+            </body>
         </article>
     </div>
 </template>
@@ -60,8 +70,19 @@ for(let i of something) {
 </script>
 
 <style scoped>
-
     article {
         margin: 1em;
+    }
+    .article-heading {
+        position: absolute;
+        height: 300px;
+        overflow: hidden;
+        left: 0px;
+        right: 0px;
+        background: url('/assets/img/article-header-test.png') fixed;
+        box-shadow: inset 0px 0px 3px 1px rgba(0,0,0,0.27);
+    }
+    .article-body {
+        margin-top: 350px;
     }
 </style>

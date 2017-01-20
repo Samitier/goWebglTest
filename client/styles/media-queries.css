@@ -30,12 +30,6 @@
     .main-logo h2 {
         font-size: 23px;
     }
-    .main-logo-sm h1{
-        font-size: 30px;
-    }
-    .main-logo-sm h2 {
-        font-size: 15px;
-    }
 }
 
 /* Small devices (landscape phones, 544px and up) */
@@ -55,12 +49,6 @@
     }
     .main-logo h2 {
         font-size: 22px;
-    }
-    .main-logo-sm h1{
-        font-size: 30px;
-    }
-    .main-logo-sm h2 {
-        font-size: 15px;
     }
     .section-heading {
         font-size:27px;

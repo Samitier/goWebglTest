@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'font-awesome-subset';
-  src: url('/fonts/font-awesome-subset.eot?29208242');
-  src: url('/fonts/font-awesome-subset.eot?29208242#iefix') format('embedded-opentype'),
-       url('/fonts/font-awesome-subset.woff2?29208242') format('woff2'),
-       url('/fonts/font-awesome-subset.woff?29208242') format('woff'),
-       url('/fonts/font-awesome-subset.ttf?29208242') format('truetype'),
-       url('/fonts/font-awesome-subset.svg?29208242#font-awesome-subset') format('svg');
+  src: url('./font-awesome-subset.eot?29208242');
+  src: url('./font-awesome-subset.eot?29208242#iefix') format('embedded-opentype'),
+       url('./font-awesome-subset.woff2?29208242') format('woff2'),
+       url('./font-awesome-subset.woff?29208242') format('woff'),
+       url('./font-awesome-subset.ttf?29208242') format('truetype'),
+       url('./font-awesome-subset.svg?29208242#font-awesome-subset') format('svg');
   font-weight: normal;
   font-style: normal;
 }

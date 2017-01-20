@@ -28,6 +28,23 @@ p {
     color: #333;
 }
 
+a { 
+    text-decoration: none;
+    color: #4183c4
+}
+p a:hover { text-decoration: underline }
+
+blockquote {
+    border-left: 4px solid #8282b1;
+    margin: 0 0 0 1em;
+    padding-left: 1em;
+    font-style: italic;
+    color: #66617f;
+}
+blockquote > p {
+    color: #66617f;
+}
+
 /* //////////// MAIN LOGO ///////////// */
 
 .main-logo { cursor: pointer }
@@ -51,15 +68,15 @@ p {
     border-top:1px solid #444444;
 }
 
-.main-logo-sm h1{
-    font-size: 30px;
-    margin-top: 10px;
+.main-logo-topbar h1{
+    font-family: 'Quicksand', sans-serif;
+    font-size: 28px;
+    text-align: left;
+    margin: .8em 0 .4em 0;
 }
-.main-logo-sm h2 {
-    font-size: 15px;
-}
-.main-logo-sm .separator {
-    margin-top: .9em;
+.main-logo-topbar small {
+    font-size: 24px;
+    opacity: 0.6;
 }
 
 /* /////////// SECTION HEADINGS //////////// */
@@ -73,12 +90,21 @@ p {
 /* ////////// CODE /////////////// */
 
 code {
-    background: #2c4c5e;
-    color: #DDD;
-    display: block;
     font-family: "Droid Sans Mono";
     font-size: 13px;
+}
+
+pre code {
+    background: #2c4c5e;
+    color: #ececec;
+    display: block;
     padding: 0em 1.5em;
     line-height: 1.5;
-    white-space:pre;
+    border-radius: 3px;
+}
+p code {
+    display: inline-block;
+    padding: 0.1em .7em;
+    border-radius: 4px;
+    background-color: rgba(221, 221, 221, 0.5)
 }

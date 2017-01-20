@@ -31,14 +31,14 @@
         padding-top: 8em
     }
     a {
-        color: #ddd;
+        color: #ccc;
         width: 28px;
         font-size: 18px;
         height: 28px;
         line-height: 1.7;
         display: inline-block;
         border-radius: 50%;
-        border: 1px solid #ddd;
+        border: 1px solid #ccc;
         opacity:0.7;
         transition: color 0.5s, border-color 0.5s, background-color 0.5s;
     }

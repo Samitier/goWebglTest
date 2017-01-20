@@ -60,8 +60,8 @@ module.exports = db => {
                 defaults: {
                     title: "Shader Sketchbook",
                     description: 
-                        `I like to experiment on shaders. I am very far from being an expert, but I like to create visually 
-                        appealing shaders and shader combinations. I like being able to control how something is
+                        `I like to experiment with shaders. I am very far from being an expert, but I like to create visually 
+                        appealing shaders and shader combinations just for fun. I like being able to control how something is
                         rendered, and take advantage of it to set my imagination free. Here, only my imagination 
                         (and my limited knowledge of maths) is the limit!`,
                     repositoryLink: "https://github.com/Samitier/webgl-rocks/tree/master/client/pages/isometric-map",
