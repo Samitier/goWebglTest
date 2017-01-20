@@ -47,25 +47,33 @@ for(let i of something) {
     console.log("something" + i)
 }
             </code></pre>
+            {{
+                article.body | markdown
+            }}
             </body>
         </article>
     </div>
 </template>
 
 <script>
-
+    import markdown from "filters/markdown"
+    
     export default {
         components: {
         },
         data() {
             return {
-                article: {}
+                article: { body:`
+                    # header one in markdown
+                    ## header two in markdown
+                ` }
             }
         },
         mounted() {
         },
         methods: {
-        }
+        },
+        filters: markdown
     }
 </script>
 
