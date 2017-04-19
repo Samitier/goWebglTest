@@ -7,8 +7,7 @@ module.exports = function(env) {
 
     let config = {
         entry: {
-            app: './client/app-frontend/main.js',
-            backend: "./client/app-backend/main.js"
+            app: './client/main.js',
         },
         output: {
             path: path.resolve(__dirname, './public'),
@@ -24,16 +23,10 @@ module.exports = function(env) {
         },
         plugins: [
             new HtmlWebpackPlugin({ 
-                template: './client/app-frontend/index.html', 
+                template: './client/index.html', 
                 hash: true, 
                 chunks: ['app'],
                 filename: 'index.html' 
-            }),
-            new HtmlWebpackPlugin({ 
-                template: './client/app-backend/index.html', 
-                hash: true, 
-                chunks: ['backend'],
-                filename: 'backend.html' 
             }),
             new ExtractTextPlugin({ filename: "assets/style.bundle.css", allChunks: true })
         ],
@@ -51,7 +44,7 @@ module.exports = function(env) {
                 },
                 {
                     test: /\.css$/,
-                    loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css-loader' }),
+                    loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' }),
                 },
                 {
                     test: /\.(png|jpg|gif|svg)$/,

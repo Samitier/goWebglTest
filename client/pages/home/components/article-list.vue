@@ -2,14 +2,14 @@
     <div>
         <h3 class="section-heading">Latest articles</h3>
         <div class="container articles-container">
-            <router-link :to="'/a/'+article.slug" v-for="article in articles" class="btn article-link col-12 container">
+            <a href="article.link" v-for="article in articles" class="btn article-link col-12 container">
                 <i class="category-icon col-3">{{ article.icon }}</i>
                 <div class="col-9 article-info">
                     <h4>{{ article.title }}</h4>
-                    <time>{{ article.createdAt | ddmmyydate }}</time>
-                    <span>{{ article.summary }}</span>
+                    <time>{{ article.date | ddmmyydate }}</time>
+                    <span>{{ article.content }}</span>
                 </div>
-            </router-link>
+            </a>
         </div>
     </div>
 </template>

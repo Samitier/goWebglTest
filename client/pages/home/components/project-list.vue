@@ -23,7 +23,7 @@
             }
         },
         created() {
-            api.getProjects().then( projects => this.projects = projects )
+            this.projects = api.getProjects()
         },
         methods: {
             selectProject(project) {
